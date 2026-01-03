@@ -36,19 +36,19 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8">
           {/* Company Info */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-3">
             <div className="flex items-center space-x-3 mb-6">
-              <img 
-                src="/Images/Aljana logo.png" 
-                alt="ALJana Tech Logo" 
+              <img
+                src="/Images/Aljana logo.png"
+                alt="ALJana Tech Logo"
                 className="w-12 h-12 rounded-full object-cover"
               />
               <span className="text-2xl font-bold">ALJana Tech</span>
             </div>
-            <p className="text-gray-300 mb-6 max-w-md">
-              A creative and tech-driven branding agency based in Nairobi, transforming brands 
+            <p className="text-gray-300 mb-6">
+              A creative and tech-driven branding agency based in Nairobi, transforming brands
               with innovative design and cutting-edge technology solutions.
             </p>
             <div className="flex space-x-4">
@@ -65,27 +65,27 @@ const Footer = () => {
           </div>
 
           {/* Newsletter Subscription */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-4">
             <h3 className="text-lg font-semibold mb-6">Subscribe to Our Newsletter</h3>
             <p className="text-gray-300 mb-6">
-              Stay updated with our latest projects, insights, and industry trends. 
+              Stay updated with our latest projects, insights, and industry trends.
               Get exclusive content delivered to your inbox.
             </p>
-            
+
             {isSubscribed ? (
               <div className="flex items-center space-x-3 text-green-400">
                 <CheckCircle className="w-5 h-5" />
                 <span>Thank you for subscribing!</span>
               </div>
             ) : (
-              <form onSubmit={handleNewsletterSubmit} className="space-y-4">
+              <form onSubmit={handleNewsletterSubmit} className="space-y-3">
                 <div>
                   <input
                     type="text"
                     placeholder="Your name (optional)"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent text-white placeholder-gray-400"
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent text-white placeholder-gray-400 text-sm"
                   />
                 </div>
                 <div>
@@ -95,13 +95,13 @@ const Footer = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent text-white placeholder-gray-400"
+                    className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-accent-500 focus:border-transparent text-white placeholder-gray-400 text-sm"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={isSubmitting || !email}
-                  className="w-full bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold py-3 rounded-lg hover:from-accent-600 hover:to-accent-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="w-full bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold py-2 rounded-lg hover:from-accent-600 hover:to-accent-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center text-sm"
                 >
                   {isSubmitting ? (
                     <>
@@ -120,44 +120,44 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="lg:col-span-2">
             <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
-              <li><Link to="/" className="text-gray-300 hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors">Services</Link></li>
-              <li><Link to="/team" className="text-gray-300 hover:text-white transition-colors">Our Team</Link></li>
-              <li><Link to="/our-work" className="text-gray-300 hover:text-white transition-colors">Our Work</Link></li>
-              <li><Link to="/case-studies" className="text-gray-300 hover:text-white transition-colors">Case Studies</Link></li>
-              <li><Link to="/blogs" className="text-gray-300 hover:text-white transition-colors">Blog</Link></li>
+            <ul className="space-y-2">
+              <li><Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">Home</Link></li>
+              <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors text-sm">About Us</Link></li>
+              <li><Link to="/services" className="text-gray-300 hover:text-white transition-colors text-sm">Services</Link></li>
+              <li><Link to="/team" className="text-gray-300 hover:text-white transition-colors text-sm">Our Team</Link></li>
+              <li><Link to="/our-work" className="text-gray-300 hover:text-white transition-colors text-sm">Our Work</Link></li>
+              <li><Link to="/case-studies" className="text-gray-300 hover:text-white transition-colors text-sm">Case Studies</Link></li>
+              <li><Link to="/blogs" className="text-gray-300 hover:text-white transition-colors text-sm">Blog</Link></li>
             </ul>
           </div>
 
           {/* Contact Info */}
-          <div className="lg:col-span-1">
+          <div className="lg:col-span-2">
             <h3 className="text-lg font-semibold mb-6">Contact Info</h3>
             <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-accent-400" />
-                <span className="text-gray-300">maingijulius001@gmail.com</span>
+              <div className="flex items-start space-x-2">
+                <Mail className="w-4 h-4 text-accent-400 mt-1 flex-shrink-0" />
+                <span className="text-gray-300 text-sm break-all">maingijulius001@gmail.com</span>
               </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-accent-400" />
-                <span className="text-gray-300">+254 705 494 094</span>
+              <div className="flex items-center space-x-2">
+                <Phone className="w-4 h-4 text-accent-400 flex-shrink-0" />
+                <span className="text-gray-300 text-sm">+254 705 494 094</span>
               </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-accent-400" />
-                <span className="text-gray-300">Nairobi, Kenya</span>
+              <div className="flex items-center space-x-2">
+                <MapPin className="w-4 h-4 text-accent-400 flex-shrink-0" />
+                <span className="text-gray-300 text-sm">Nairobi, Kenya</span>
               </div>
             </div>
           </div>
 
           {/* Legal Links */}
-          <div>
+          <div className="lg:col-span-1">
             <h3 className="text-lg font-semibold mb-6">Legal</h3>
-            <ul className="space-y-3">
-              <li><Link to="/terms-and-conditions" className="text-gray-300 hover:text-white transition-colors">Terms & Conditions</Link></li>
-              <li><Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">Privacy Policy</Link></li>
+            <ul className="space-y-2">
+              <li><Link to="/terms-and-conditions" className="text-gray-300 hover:text-white transition-colors text-sm">Terms & Conditions</Link></li>
+              <li><Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors text-sm">Privacy Policy</Link></li>
             </ul>
           </div>
         </div>
