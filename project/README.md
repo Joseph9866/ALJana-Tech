@@ -1,1 +1,0 @@
-# ALJana_Tech
