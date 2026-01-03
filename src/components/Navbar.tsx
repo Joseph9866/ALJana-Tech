@@ -41,9 +41,9 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
             <img
-              src="/Images/Aljana logo.png"
+              src="/Images/Aljana_logom.png"
               alt="ALJana Tech Logo"
-              className="w-12 h-12 rounded-full object-cover"
+              className="w-28 h-18 rounded-full object-cover"
             />
             <span className="text-2xl font-bold text-white">
               ALJana Tech
@@ -51,7 +51,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
+          <div className="hidden lg:flex items-center space-x-2 xl:space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}

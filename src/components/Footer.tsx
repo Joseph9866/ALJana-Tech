@@ -41,9 +41,9 @@ const Footer = () => {
           <div className="lg:col-span-3">
             <div className="flex items-center space-x-3 mb-6">
               <img
-                src="/Images/Aljana logo.png"
+                src="/Images/Aljana_logom.png"
                 alt="ALJana Tech Logo"
-                className="w-12 h-12 rounded-full object-cover"
+                className="w-28 h-18 rounded-full object-cover"
               />
               <span className="text-2xl font-bold">ALJana Tech</span>
             </div>

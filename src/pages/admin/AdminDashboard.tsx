@@ -175,9 +175,9 @@ const AdminDashboard = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <img
-                src="/Images/Aljana logo.png"
+                src="/Images/Aljana_logo.png"
                 alt="ALJana Tech"
-                className="w-10 h-10 rounded-full"
+                className="w-12 h-12 rounded-full"
               />
               <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1>
             </div>
