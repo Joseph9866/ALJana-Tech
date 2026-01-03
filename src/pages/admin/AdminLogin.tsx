@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../lib/supabase';
 import { Lock, Mail, Eye, EyeOff, AlertCircle } from 'lucide-react';
 
 const AdminLogin = () => {
@@ -18,30 +17,23 @@ const AdminLogin = () => {
     setError('');
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const response = await fetch(`${supabaseUrl}/functions/v1/admin-auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
 
-      if (error) throw error;
+      const data = await response.json();
 
-      // Check if user is admin
-      const { data: adminUser } = await supabase
-        .from('admin_users')
-        .select('*')
-        .eq('email', email)
-        .eq('is_active', true)
-        .single();
-
-      if (!adminUser) {
-        throw new Error('Access denied. Admin privileges required.');
+      if (!response.ok) {
+        throw new Error(data.error || 'Login failed');
       }
 
-      // Update last login
-      await supabase
-        .from('admin_users')
-        .update({ last_login: new Date().toISOString() })
-        .eq('id', adminUser.id);
+      localStorage.setItem('adminToken', data.token);
+      localStorage.setItem('adminUser', JSON.stringify(data.admin));
 
       navigate('/admin/dashboard');
     } catch (error: any) {
@@ -52,7 +44,7 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-emerald-50 flex items-center justify-center p-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -60,7 +52,7 @@ const AdminLogin = () => {
         className="bg-white rounded-3xl shadow-xl p-8 w-full max-w-md"
       >
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <Lock className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Admin Login</h1>
@@ -90,8 +82,8 @@ const AdminLogin = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
-                placeholder="admin@aljanatech.com"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                placeholder="admin@example.com"
               />
             </div>
           </div>
@@ -107,7 +99,7 @@ const AdminLogin = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                 placeholder="Enter your password"
               />
               <button
@@ -123,7 +115,7 @@ const AdminLogin = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-gradient-to-r from-purple-600 to-green-500 text-white font-semibold py-3 rounded-xl hover:from-purple-700 hover:to-green-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
+            className="w-full bg-gradient-to-r from-blue-600 to-emerald-500 text-white font-semibold py-3 rounded-xl hover:from-blue-700 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center"
           >
             {isLoading ? (
               <>
@@ -138,10 +130,7 @@ const AdminLogin = () => {
 
         <div className="mt-8 text-center">
           <p className="text-sm text-gray-500">
-            Forgot your password?{' '}
-            <a href="mailto:maingijulius001@gmail.com" className="text-purple-600 hover:text-purple-700 font-medium">
-              Contact Support
-            </a>
+            Use: admin@example.com / admin123
           </p>
         </div>
       </motion.div>

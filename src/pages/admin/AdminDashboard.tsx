@@ -2,20 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
-import { 
-  BarChart3, 
-  Users, 
-  FileText, 
-  Briefcase, 
+import {
+  BarChart3,
+  Users,
+  FileText,
+  Briefcase,
   MessageSquare,
   BookOpen,
   Settings,
   LogOut,
-  Plus,
-  Eye,
-  Edit,
-  Trash2
+  Plus
 } from 'lucide-react';
+import ContentManager from '../../components/admin/ContentManager';
 
 const AdminDashboard = () => {
   const [user, setUser] = useState<any>(null);
@@ -35,27 +33,21 @@ const AdminDashboard = () => {
     loadStats();
   }, []);
 
-  const checkAuth = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
+  const checkAuth = () => {
+    const token = localStorage.getItem('adminToken');
+    const userStr = localStorage.getItem('adminUser');
+
+    if (!token || !userStr) {
       navigate('/admin/login');
       return;
     }
 
-    const { data: adminUser } = await supabase
-      .from('admin_users')
-      .select('*')
-      .eq('email', user.email)
-      .eq('is_active', true)
-      .single();
-
-    if (!adminUser) {
-      await supabase.auth.signOut();
+    try {
+      const userData = JSON.parse(userStr);
+      setUser(userData);
+    } catch {
       navigate('/admin/login');
-      return;
     }
-
-    setUser(adminUser);
   };
 
   const loadStats = async () => {
@@ -89,8 +81,9 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUser');
     navigate('/admin/login');
   };
 
@@ -110,27 +103,80 @@ const AdminDashboard = () => {
     { id: 'team', label: 'Team Members', icon: Users },
     { id: 'testimonials', label: 'Testimonials', icon: MessageSquare },
     { id: 'blogs', label: 'Blog Posts', icon: BookOpen },
-    { id: 'settings', label: 'Settings', icon: Settings }
   ];
+
+  const contentFields = {
+    projects: [
+      { name: 'title', label: 'Title', type: 'text' as const, required: true },
+      { name: 'client', label: 'Client', type: 'text' as const, required: true },
+      { name: 'category', label: 'Category', type: 'text' as const, required: true },
+      { name: 'description', label: 'Description', type: 'textarea' as const, required: true },
+      { name: 'image_url', label: 'Image URL', type: 'url' as const, required: true },
+      { name: 'project_url', label: 'Project URL', type: 'url' as const },
+      { name: 'location', label: 'Location', type: 'text' as const },
+      { name: 'year', label: 'Year', type: 'text' as const },
+      { name: 'featured', label: 'Featured', type: 'checkbox' as const },
+    ],
+    'case_studies': [
+      { name: 'title', label: 'Title', type: 'text' as const, required: true },
+      { name: 'category', label: 'Category', type: 'text' as const, required: true },
+      { name: 'duration', label: 'Duration', type: 'text' as const },
+      { name: 'image_url', label: 'Image URL', type: 'url' as const, required: true },
+      { name: 'overview', label: 'Overview', type: 'textarea' as const, required: true },
+      { name: 'methodology', label: 'Methodology', type: 'textarea' as const, required: true },
+      { name: 'conclusion', label: 'Conclusion', type: 'textarea' as const },
+    ],
+    team_members: [
+      { name: 'name', label: 'Name', type: 'text' as const, required: true },
+      { name: 'role', label: 'Role', type: 'text' as const, required: true },
+      { name: 'bio', label: 'Bio', type: 'textarea' as const },
+      { name: 'image_url', label: 'Image URL', type: 'url' as const, required: true },
+      { name: 'order_index', label: 'Display Order', type: 'number' as const },
+      { name: 'is_active', label: 'Active', type: 'checkbox' as const },
+    ],
+    testimonials: [
+      { name: 'client_name', label: 'Client Name', type: 'text' as const, required: true },
+      { name: 'company', label: 'Company', type: 'text' as const, required: true },
+      { name: 'role', label: 'Role', type: 'text' as const },
+      { name: 'testimonial_text', label: 'Testimonial', type: 'textarea' as const, required: true },
+      { name: 'image_url', label: 'Image URL', type: 'url' as const },
+      { name: 'rating', label: 'Rating (1-5)', type: 'number' as const },
+      { name: 'project_title', label: 'Project Title', type: 'text' as const },
+      { name: 'category', label: 'Category', type: 'text' as const },
+      { name: 'featured', label: 'Featured', type: 'checkbox' as const },
+    ],
+    blog_posts: [
+      { name: 'title', label: 'Title', type: 'text' as const, required: true },
+      { name: 'slug', label: 'Slug', type: 'text' as const, required: true },
+      { name: 'author', label: 'Author', type: 'text' as const, required: true },
+      { name: 'category', label: 'Category', type: 'text' as const, required: true },
+      { name: 'excerpt', label: 'Excerpt', type: 'textarea' as const },
+      { name: 'content', label: 'Content', type: 'textarea' as const, required: true },
+      { name: 'image_url', label: 'Image URL', type: 'url' as const, required: true },
+      { name: 'download_url', label: 'Download URL', type: 'url' as const },
+      { name: 'read_time', label: 'Read Time', type: 'text' as const },
+      { name: 'featured', label: 'Featured', type: 'checkbox' as const },
+      { name: 'published', label: 'Published', type: 'checkbox' as const },
+    ],
+  };
 
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
       <header className="bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
-              <img 
-                src="/Images/Aljana logo.png" 
-                alt="ALJana Tech" 
+              <img
+                src="/Images/Aljana logo.png"
+                alt="ALJana Tech"
                 className="w-10 h-10 rounded-full"
               />
               <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1>
@@ -151,7 +197,6 @@ const AdminDashboard = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid lg:grid-cols-4 gap-8">
-          {/* Sidebar */}
           <div className="lg:col-span-1">
             <nav className="bg-white rounded-xl shadow-sm p-6">
               <ul className="space-y-2">
@@ -161,7 +206,7 @@ const AdminDashboard = () => {
                       onClick={() => setActiveTab(item.id)}
                       className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-colors ${
                         activeTab === item.id
-                          ? 'bg-gradient-to-r from-purple-600 to-green-500 text-white'
+                          ? 'bg-gradient-to-r from-blue-600 to-emerald-500 text-white'
                           : 'text-gray-600 hover:bg-gray-50'
                       }`}
                     >
@@ -174,7 +219,6 @@ const AdminDashboard = () => {
             </nav>
           </div>
 
-          {/* Main Content */}
           <div className="lg:col-span-3">
             {activeTab === 'overview' && (
               <motion.div
@@ -183,7 +227,7 @@ const AdminDashboard = () => {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="text-3xl font-bold text-gray-900 mb-8">Dashboard Overview</h2>
-                
+
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                   {statCards.map((card, index) => (
                     <motion.div
@@ -209,47 +253,59 @@ const AdminDashboard = () => {
                 <div className="bg-white rounded-xl shadow-sm p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">Quick Actions</h3>
                   <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <button className="flex items-center space-x-2 px-4 py-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors">
-                      <Plus className="w-4 h-4" />
-                      <span>Add Project</span>
-                    </button>
-                    <button className="flex items-center space-x-2 px-4 py-3 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors">
-                      <Plus className="w-4 h-4" />
-                      <span>Add Case Study</span>
-                    </button>
-                    <button className="flex items-center space-x-2 px-4 py-3 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 transition-colors">
-                      <Plus className="w-4 h-4" />
-                      <span>Add Team Member</span>
-                    </button>
-                    <button className="flex items-center space-x-2 px-4 py-3 bg-yellow-50 text-yellow-700 rounded-lg hover:bg-yellow-100 transition-colors">
-                      <Plus className="w-4 h-4" />
-                      <span>Add Blog Post</span>
-                    </button>
+                    {menuItems.slice(1).map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => setActiveTab(item.id)}
+                        className="flex items-center space-x-2 px-4 py-3 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+                      >
+                        <Plus className="w-4 h-4" />
+                        <span>Manage {item.label}</span>
+                      </button>
+                    ))}
                   </div>
                 </div>
               </motion.div>
             )}
 
-            {/* Other tabs content would go here */}
-            {activeTab !== 'overview' && (
-              <div className="bg-white rounded-xl shadow-sm p-8 text-center">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">
-                  {menuItems.find(item => item.id === activeTab)?.label} Management
-                </h2>
-                <p className="text-gray-600 mb-6">
-                  This section is under development. Full CRUD functionality will be available soon.
-                </p>
-                <div className="flex justify-center space-x-4">
-                  <button className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-green-500 text-white rounded-lg hover:from-purple-700 hover:to-green-600 transition-all duration-300">
-                    <Plus className="w-4 h-4" />
-                    <span>Add New</span>
-                  </button>
-                  <button className="flex items-center space-x-2 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
-                    <Eye className="w-4 h-4" />
-                    <span>View All</span>
-                  </button>
-                </div>
-              </div>
+            {activeTab === 'projects' && (
+              <ContentManager
+                contentType="projects"
+                title="Manage Projects"
+                fields={contentFields.projects}
+              />
+            )}
+
+            {activeTab === 'case-studies' && (
+              <ContentManager
+                contentType="case_studies"
+                title="Manage Case Studies"
+                fields={contentFields.case_studies}
+              />
+            )}
+
+            {activeTab === 'team' && (
+              <ContentManager
+                contentType="team_members"
+                title="Manage Team Members"
+                fields={contentFields.team_members}
+              />
+            )}
+
+            {activeTab === 'testimonials' && (
+              <ContentManager
+                contentType="testimonials"
+                title="Manage Testimonials"
+                fields={contentFields.testimonials}
+              />
+            )}
+
+            {activeTab === 'blogs' && (
+              <ContentManager
+                contentType="blog_posts"
+                title="Manage Blog Posts"
+                fields={contentFields.blog_posts}
+              />
             )}
           </div>
         </div>

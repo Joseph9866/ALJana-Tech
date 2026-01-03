@@ -1,60 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { 
-  Users, 
-  Linkedin, 
-  Twitter, 
+import {
+  Users,
+  Linkedin,
+  Twitter,
   Mail,
   Code,
   Palette,
   Target,
   Zap
 } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 const Team = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
   const [teamRef, teamInView] = useInView({ threshold: 0.2, triggerOnce: true });
+  const [teamMembers, setTeamMembers] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const teamMembers = [
-    {
-      name: 'Julius Maingi',
-      role: 'Managing Director',
-      bio: 'Visionary leader with 3+ years of experience in brand strategy and creative direction. Passionate about transforming businesses through innovative design.',
-      image: 'Images/maingi.jpeg',
-      skills: ['Brand Strategy', 'Creative Direction', 'Team Leadership'],
-      social: {
-        linkedin: '#',
-        twitter: '#',
-        email: 'maingijulius001@gmail.com'
-      }
-    },
-    {
-      name: 'Nyambura Irungu',
-      role: 'Creative Director',
-      bio: 'Creative powerhouse specializing in visual identity and digital design. Brings brands to life with compelling visual narratives.',
-      image: '',
-      skills: ['Visual Design', 'Brand Identity', 'UI/UX Design'],
-      social: {
-        linkedin: '#',
-        twitter: '#',
-        email: 'sarah@aljanatech.com'
-      }
-    },
-    {
-      name: 'Joseph Kimani',
-      role: 'CTO & Senior developer',
-      bio: 'Full-stack developer with expertise in modern web technologies and cloud solutions. Builds scalable, performant applications.',
-      image: 'Images/joseph.jpg',
-      skills: ['Web Development', 'Cloud Computing', 'AI $ Automation'],
-      social: {
-        linkedin: 'https://www.linkedin.com/in/joseph-kiarie-047a26264/',
-        twitter: 'https://x.com/josekeam01',
-        email: 'josekeam01@gmail.com'
-      }
+  useEffect(() => {
+    loadTeamMembers();
+  }, []);
+
+  const loadTeamMembers = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('team_members')
+        .select('*')
+        .eq('is_active', true)
+        .order('order_index', { ascending: true });
+
+      if (error) throw error;
+
+      const formattedMembers = data?.map((member: any) => ({
+        name: member.name,
+        role: member.role,
+        bio: member.bio || '',
+        image: member.image_url || '',
+        skills: member.skills || [],
+        social: member.social_links || { linkedin: '#', twitter: '#', email: '' }
+      })) || [];
+
+      setTeamMembers(formattedMembers);
+    } catch (error) {
+      console.error('Error loading team members:', error);
+    } finally {
+      setIsLoading(false);
     }
-    
-  ];
+  };
 
   const getSkillIcon = (skill: string) => {
     if (skill.includes('Design') || skill.includes('Brand')) return Palette;
@@ -102,8 +96,17 @@ const Team = () => {
       {/* Team Grid */}
       <section ref={teamRef} className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {teamMembers.map((member, index) => (
+          {isLoading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+            </div>
+          ) : teamMembers.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="text-gray-500 text-lg">No team members found.</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {teamMembers.map((member, index) => (
               <motion.div
                 key={member.name}
                 initial={{ y: 50, opacity: 0 }}
@@ -170,8 +173,9 @@ const Team = () => {
                   </a>
                 </div>
               </motion.div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
