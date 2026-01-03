@@ -36,10 +36,10 @@ const Navbar = () => {
         scrolled ? 'bg-primary-900/95 backdrop-blur-md shadow-lg' : 'bg-primary-900/90 backdrop-blur-sm'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-8 sm:px-12 lg:px-16">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center space-x-3 flex-shrink-0">
             <img
               src="/Images/Aljana logo.png"
               alt="ALJana Tech Logo"
@@ -51,12 +51,12 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
             {navItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 whitespace-nowrap ${
                   location.pathname === item.path
                     ? 'text-white'
                     : 'text-gray-300 hover:text-white'
