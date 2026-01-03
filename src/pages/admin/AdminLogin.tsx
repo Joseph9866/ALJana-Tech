@@ -127,12 +127,6 @@ const AdminLogin = () => {
             )}
           </button>
         </form>
-
-        <div className="mt-8 text-center">
-          <p className="text-sm text-gray-500">
-            Use: admin@example.com / admin123
-          </p>
-        </div>
       </motion.div>
     </div>
   );
