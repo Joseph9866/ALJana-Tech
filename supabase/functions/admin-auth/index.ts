@@ -37,7 +37,7 @@ Deno.serve(async (req: Request) => {
 
       const { data: admin, error } = await supabase
         .from('admin_users')
-        .select('id, email, role, is_active')
+        .select('id, email, role, is_active, password_hash')
         .eq('email', email)
         .eq('is_active', true)
         .maybeSingle();
@@ -58,9 +58,7 @@ Deno.serve(async (req: Request) => {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const passwordHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-      const storedHash = email === 'admin@example.com' ? passwordHash : 'invalid';
-      
-      if (passwordHash !== storedHash && email === 'admin@example.com') {
+      if (passwordHash !== admin.password_hash) {
         return new Response(
           JSON.stringify({ error: 'Invalid credentials' }),
           {
