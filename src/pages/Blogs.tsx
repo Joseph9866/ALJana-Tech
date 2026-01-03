@@ -155,12 +155,12 @@ const Blogs = () => {
 
   const getCategoryColor = (category: string) => {
     const colors: { [key: string]: string } = {
-      'Brand Strategy': 'from-purple-500 to-purple-600',
-      'Digital Marketing': 'from-yellow-500 to-yellow-600',
-      'Web Development': 'from-green-500 to-green-600',
-      'Cloud Computing': 'from-blue-500 to-blue-600',
-      'Social Media': 'from-pink-500 to-pink-600',
-      'SEO': 'from-indigo-500 to-indigo-600'
+      'Brand Strategy': 'from-primary-500 to-primary-600',
+      'Digital Marketing': 'from-accent-500 to-accent-600',
+      'Web Development': 'from-secondary-500 to-secondary-600',
+      'Cloud Computing': 'from-primary-500 to-primary-600',
+      'Social Media': 'from-secondary-500 to-secondary-600',
+      'SEO': 'from-primary-500 to-primary-600'
     };
     return colors[category] || 'from-gray-500 to-gray-600';
   };
@@ -173,21 +173,21 @@ const Blogs = () => {
       className="pt-20"
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50">
+      <section ref={heroRef} className="py-24 bg-gradient-to-br from-primary-50 via-accent-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={heroInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-100 to-green-100 text-purple-700 rounded-full text-sm font-medium mb-8">
+            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-sm font-medium mb-8">
               <BookOpen className="w-4 h-4 mr-2" />
               Insights, Guides & Industry Knowledge
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
               Our{' '}
-              <span className="bg-gradient-to-r from-purple-600 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 bg-clip-text text-transparent">
                 Blog
               </span>
             </h1>
@@ -208,11 +208,11 @@ const Blogs = () => {
               initial={{ y: 50, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8 }}
-              className="bg-gradient-to-br from-purple-50 to-green-50 rounded-3xl p-8 lg:p-12"
+              className="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-3xl p-8 lg:p-12"
             >
               <div className="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                  <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-100 to-green-100 text-purple-700 rounded-full text-sm font-medium mb-6">
+                  <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-sm font-medium mb-6">
                     <FileText className="w-4 h-4 mr-2" />
                     Featured Article
                   </div>
@@ -234,7 +234,7 @@ const Blogs = () => {
                   
                   <button
                     onClick={() => handleDownloadClick(blog)}
-                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-green-500 text-white font-semibold rounded-xl hover:from-purple-700 hover:to-green-600 transition-all duration-300 transform hover:scale-105"
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-500 text-white font-semibold rounded-xl hover:from-primary-700 hover:to-secondary-600 transition-all duration-300 transform hover:scale-105"
                   >
                     Download Full Article
                     <Download className="w-5 h-5 ml-2" />
@@ -242,7 +242,7 @@ const Blogs = () => {
                 </div>
                 
                 <div className="relative">
-                  <div className="bg-gradient-to-r from-purple-600 to-green-500 p-1 rounded-3xl">
+                  <div className="bg-gradient-to-r from-primary-600 to-secondary-500 p-1 rounded-3xl">
                     <img
                       src={blog.image}
                       alt={blog.title}
@@ -267,7 +267,7 @@ const Blogs = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               More{' '}
-              <span className="bg-gradient-to-r from-purple-600 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                 Articles
               </span>
             </h2>
@@ -298,7 +298,7 @@ const Blogs = () => {
                 </div>
                 
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors duration-200">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors duration-200">
                     {blog.title}
                   </h3>
                   <p className="text-gray-600 mb-4 leading-relaxed">{blog.excerpt}</p>
@@ -314,7 +314,7 @@ const Blogs = () => {
                   
                   <button
                     onClick={() => handleDownloadClick(blog)}
-                    className="w-full bg-gradient-to-r from-purple-600 to-green-500 text-white font-semibold py-3 rounded-lg hover:from-purple-700 hover:to-green-600 transition-all duration-300 flex items-center justify-center"
+                    className="w-full bg-gradient-to-r from-primary-600 to-secondary-500 text-white font-semibold py-3 rounded-lg hover:from-primary-700 hover:to-secondary-600 transition-all duration-300 flex items-center justify-center"
                   >
                     Download Article
                     <Download className="w-4 h-4 ml-2" />
@@ -351,12 +351,12 @@ const Blogs = () => {
             ) : (
               <>
                 <div className="text-center mb-8">
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <Download className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Download Article</h3>
                   <p className="text-gray-600">Please provide your details to download:</p>
-                  <p className="font-medium text-purple-600 mt-2">{selectedBlog?.title}</p>
+                  <p className="font-medium text-primary-600 mt-2">{selectedBlog?.title}</p>
                 </div>
 
                 <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -370,7 +370,7 @@ const Blogs = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
                       placeholder="Enter your full name"
                     />
                   </div>
@@ -385,7 +385,7 @@ const Blogs = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200"
                       placeholder="Enter your email address"
                     />
                   </div>
@@ -397,7 +397,7 @@ const Blogs = () => {
                       checked={acceptedTerms}
                       onChange={(e) => setAcceptedTerms(e.target.checked)}
                       required
-                      className="mt-1 w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2"
+                      className="mt-1 w-4 h-4 text-primary-600 bg-gray-100 border-gray-300 rounded focus:ring-primary-500 focus:ring-2"
                     />
                     <label htmlFor="acceptTerms" className="text-sm text-gray-700 leading-relaxed">
                       I agree to the{' '}
@@ -405,7 +405,7 @@ const Blogs = () => {
                         href="/terms-and-conditions"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-purple-600 hover:text-purple-700 underline"
+                        className="text-primary-600 hover:text-primary-700 underline"
                       >
                         Terms & Conditions
                       </a>
@@ -414,7 +414,7 @@ const Blogs = () => {
                         href="/privacy-policy"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-purple-600 hover:text-purple-700 underline"
+                        className="text-primary-600 hover:text-primary-700 underline"
                       >
                         Privacy Policy
                       </a>
@@ -425,7 +425,7 @@ const Blogs = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting || !formData.name || !formData.email || !acceptedTerms}
-                    className="w-full bg-gradient-to-r from-purple-600 to-green-500 text-white font-semibold py-4 rounded-xl hover:from-purple-700 hover:to-green-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="w-full bg-gradient-to-r from-primary-600 to-secondary-500 text-white font-semibold py-4 rounded-xl hover:from-primary-700 hover:to-secondary-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                   >
                     {isSubmitting ? (
                       <>

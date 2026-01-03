@@ -240,21 +240,21 @@ const CaseStudies = () => {
       className="pt-20"
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50">
+      <section ref={heroRef} className="py-24 bg-gradient-to-br from-primary-50 via-accent-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={heroInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-100 to-green-100 text-purple-700 rounded-full text-sm font-medium mb-8">
+            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-sm font-medium mb-8">
               <Briefcase className="w-4 h-4 mr-2" />
               Data-Driven Research & Analysis
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
               Research{' '}
-              <span className="bg-gradient-to-r from-purple-600 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 bg-clip-text text-transparent">
                 Case Studies
               </span>
             </h1>
@@ -278,7 +278,7 @@ const CaseStudies = () => {
                 onClick={() => setSelectedStudy(index)}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-200 text-sm ${
                   selectedStudy === index
-                    ? 'bg-gradient-to-r from-purple-600 to-green-500 text-white'
+                    ? 'bg-gradient-to-r from-primary-600 to-secondary-500 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -300,7 +300,7 @@ const CaseStudies = () => {
           >
             {/* Study Header */}
             <div className="text-center mb-16">
-              <div className="inline-block px-4 py-2 bg-gradient-to-r from-purple-100 to-green-100 text-purple-700 rounded-full text-sm font-medium mb-6">
+              <div className="inline-block px-4 py-2 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-sm font-medium mb-6">
                 {caseStudies[selectedStudy].category} • {caseStudies[selectedStudy].duration}
               </div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
@@ -321,10 +321,10 @@ const CaseStudies = () => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="text-center bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <stat.icon className="w-8 h-8 text-white" />
                   </div>
-                  <div className="text-3xl font-bold text-purple-600 mb-2">{stat.value}</div>
+                  <div className="text-3xl font-bold text-primary-600 mb-2">{stat.value}</div>
                   <div className="text-sm font-medium text-gray-900 mb-1">{stat.metric}</div>
                   <div className="text-xs text-gray-600">{stat.description}</div>
                 </motion.div>
@@ -337,7 +337,7 @@ const CaseStudies = () => {
                 {/* Methodology */}
                 <div className="mb-8">
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                    <BarChart3 className="w-6 h-6 mr-3 text-purple-600" />
+                    <BarChart3 className="w-6 h-6 mr-3 text-primary-600" />
                     Methodology
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -348,13 +348,13 @@ const CaseStudies = () => {
                 {/* Key Findings */}
                 <div className="mb-8">
                   <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                    <TrendingUp className="w-6 h-6 mr-3 text-green-600" />
+                    <TrendingUp className="w-6 h-6 mr-3 text-secondary-600" />
                     Key Findings
                   </h3>
                   <div className="space-y-4">
                     {caseStudies[selectedStudy].keyFindings.map((finding, index) => (
                       <div key={index} className="flex items-start space-x-3">
-                        <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
+                        <CheckCircle className="w-5 h-5 text-secondary-500 flex-shrink-0 mt-1" />
                         <p className="text-gray-700">{finding}</p>
                       </div>
                     ))}
@@ -362,15 +362,15 @@ const CaseStudies = () => {
                 </div>
 
                 {/* Recommendations */}
-                <div className="bg-gradient-to-br from-purple-50 to-green-50 p-8 rounded-2xl">
+                <div className="bg-gradient-to-br from-primary-50 to-secondary-50 p-8 rounded-2xl">
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
-                    <ArrowRight className="w-5 h-5 mr-2 text-purple-600" />
+                    <ArrowRight className="w-5 h-5 mr-2 text-primary-600" />
                     Recommendations
                   </h3>
                   <ul className="space-y-3">
                     {caseStudies[selectedStudy].recommendations.map((rec, index) => (
                       <li key={index} className="flex items-start space-x-3">
-                        <div className="w-2 h-2 bg-gradient-to-r from-purple-600 to-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                        <div className="w-2 h-2 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-gray-700">{rec}</span>
                       </li>
                     ))}
@@ -382,7 +382,7 @@ const CaseStudies = () => {
               <div>
                 <div className="bg-white border border-gray-200 rounded-3xl p-8 shadow-lg">
                   <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
-                    <PieChart className="w-6 h-6 mr-3 text-yellow-600" />
+                    <PieChart className="w-6 h-6 mr-3 text-accent-600" />
                     Detailed Analysis
                   </h3>
                   
@@ -416,15 +416,15 @@ const CaseStudies = () => {
                             <div className="grid grid-cols-3 gap-4 text-sm">
                               <div>
                                 <span className="text-gray-600">ROI: </span>
-                                <span className="font-semibold text-green-600">{channel.avgROI}</span>
+                                <span className="font-semibold text-secondary-600">{channel.avgROI}</span>
                               </div>
                               <div>
                                 <span className="text-gray-600">Engagement: </span>
-                                <span className="font-semibold text-blue-600">{channel.engagementRate}</span>
+                                <span className="font-semibold text-primary-600">{channel.engagementRate}</span>
                               </div>
                               <div>
                                 <span className="text-gray-600">Cost/Lead: </span>
-                                <span className="font-semibold text-purple-600">{channel.costPerLead}</span>
+                                <span className="font-semibold text-primary-600">{channel.costPerLead}</span>
                               </div>
                             </div>
                           </div>
@@ -443,11 +443,11 @@ const CaseStudies = () => {
                             <div className="grid grid-cols-2 gap-4 text-sm">
                               <div>
                                 <span className="text-gray-600">Conversion: </span>
-                                <span className="font-semibold text-green-600">{speed.conversionRate}</span>
+                                <span className="font-semibold text-secondary-600">{speed.conversionRate}</span>
                               </div>
                               <div>
                                 <span className="text-gray-600">Revenue Impact: </span>
-                                <span className={`font-semibold ${speed.revenueImpact.includes('+') ? 'text-green-600' : speed.revenueImpact.includes('-') ? 'text-red-600' : 'text-gray-600'}`}>
+                                <span className={`font-semibold ${speed.revenueImpact.includes('+') ? 'text-secondary-600' : speed.revenueImpact.includes('-') ? 'text-red-600' : 'text-gray-600'}`}>
                                   {speed.revenueImpact}
                                 </span>
                               </div>
@@ -458,7 +458,7 @@ const CaseStudies = () => {
                     </div>
                   )}
 
-                  <div className="bg-gradient-to-r from-purple-100 to-green-100 p-6 rounded-xl">
+                  <div className="bg-gradient-to-r from-primary-100 to-secondary-100 p-6 rounded-xl">
                     <h4 className="font-semibold text-gray-900 mb-3">Study Conclusion</h4>
                     <p className="text-gray-700 leading-relaxed">
                       {caseStudies[selectedStudy].conclusion}
@@ -472,7 +472,7 @@ const CaseStudies = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-purple-900 via-purple-800 to-green-800 text-white">
+      <section className="py-24 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -481,11 +481,11 @@ const CaseStudies = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Ready to Apply These{' '}
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-accent-400 to-secondary-400 bg-clip-text text-transparent">
                 Insights?
               </span>
             </h2>
-            <p className="text-xl text-purple-100 mb-10 max-w-3xl mx-auto">
+            <p className="text-xl text-primary-100 mb-10 max-w-3xl mx-auto">
               Let our research-backed strategies help transform your business. Contact us to discuss 
               how these findings can be applied to your specific situation.
             </p>
@@ -494,7 +494,7 @@ const CaseStudies = () => {
                 href="/contact"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 font-semibold rounded-xl hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300"
+                className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-accent-400 to-accent-500 text-gray-900 font-semibold rounded-xl hover:from-accent-500 hover:to-accent-600 transition-all duration-300"
               >
                 Get Strategic Consultation
                 <ArrowRight className="w-5 h-5 ml-2" />

@@ -65,7 +65,7 @@ const Team = () => {
       className="pt-20"
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50">
+      <section ref={heroRef} className="py-24 bg-gradient-to-br from-primary-50 via-accent-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -79,7 +79,7 @@ const Team = () => {
             
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
               The{' '}
-              <span className="bg-gradient-to-r from-purple-600 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 bg-clip-text text-transparent">
                 People
               </span>{' '}
               Behind ALJana Tech
@@ -128,7 +128,7 @@ const Team = () => {
                 {/* Member Info */}
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{member.name}</h3>
-                  <p className="text-purple-600 font-medium mb-4">{member.role}</p>
+                  <p className="text-primary-600 font-medium mb-4">{member.role}</p>
                   <p className="text-gray-600 leading-relaxed">{member.bio}</p>
                 </div>
 
@@ -141,7 +141,7 @@ const Team = () => {
                       return (
                         <div
                           key={skillIndex}
-                          className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-purple-100 to-green-100 text-purple-700 rounded-full text-xs font-medium"
+                          className="inline-flex items-center px-3 py-1 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-xs font-medium"
                         >
                           <SkillIcon className="w-3 h-3 mr-1" />
                           {skill}
@@ -155,19 +155,19 @@ const Team = () => {
                 <div className="flex justify-center space-x-4">
                   <a
                     href={member.social.linkedin}
-                    className="w-10 h-10 bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg flex items-center justify-center text-white hover:from-purple-700 hover:to-purple-800 transition-all duration-200 transform hover:scale-110"
+                    className="w-10 h-10 bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg flex items-center justify-center text-white hover:from-primary-700 hover:to-primary-800 transition-all duration-200 transform hover:scale-110"
                   >
                     <Linkedin className="w-4 h-4" />
                   </a>
                   <a
                     href={member.social.twitter}
-                    className="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center text-white hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-110"
+                    className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center text-white hover:from-primary-600 hover:to-primary-700 transition-all duration-200 transform hover:scale-110"
                   >
                     <Twitter className="w-4 h-4" />
                   </a>
                   <a
                     href={`mailto:${member.social.email}`}
-                    className="w-10 h-10 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white hover:from-green-600 hover:to-green-700 transition-all duration-200 transform hover:scale-110"
+                    className="w-10 h-10 bg-gradient-to-r from-secondary-500 to-secondary-600 rounded-lg flex items-center justify-center text-white hover:from-secondary-600 hover:to-secondary-700 transition-all duration-200 transform hover:scale-110"
                   >
                     <Mail className="w-4 h-4" />
                   </a>
@@ -180,7 +180,7 @@ const Team = () => {
       </section>
 
       {/* Culture Section */}
-      <section className="py-24 bg-gradient-to-br from-purple-900 via-purple-800 to-green-800 text-white">
+      <section className="py-24 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -190,31 +190,31 @@ const Team = () => {
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-8">
                 Our{' '}
-                <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-accent-400 to-secondary-400 bg-clip-text text-transparent">
                   Culture
                 </span>
               </h2>
-              <p className="text-xl text-purple-100 mb-8 leading-relaxed">
+              <p className="text-xl text-primary-100 mb-8 leading-relaxed">
                 We believe in fostering a collaborative, creative, and inclusive environment where 
                 every team member can thrive and contribute their unique talents.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-yellow-500 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-accent-500 rounded-lg flex items-center justify-center">
                     <Zap className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Innovation First</h3>
-                    <p className="text-purple-200">We encourage creative thinking and bold ideas</p>
+                    <p className="text-primary-200">We encourage creative thinking and bold ideas</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                  <div className="w-12 h-12 bg-secondary-500 rounded-lg flex items-center justify-center">
                     <Users className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Team Collaboration</h3>
-                    <p className="text-purple-200">Together we achieve more than we ever could alone</p>
+                    <p className="text-primary-200">Together we achieve more than we ever could alone</p>
                   </div>
                 </div>
               </div>
@@ -227,20 +227,20 @@ const Team = () => {
               className="grid grid-cols-2 gap-6"
             >
               <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl text-center">
-                <div className="text-3xl font-bold text-yellow-400 mb-2">100%</div>
-                <div className="text-purple-200">Remote Friendly</div>
+                <div className="text-3xl font-bold text-accent-400 mb-2">100%</div>
+                <div className="text-primary-200">Remote Friendly</div>
               </div>
               <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl text-center">
-                <div className="text-3xl font-bold text-green-400 mb-2">24/7</div>
-                <div className="text-purple-200">Support Culture</div>
+                <div className="text-3xl font-bold text-secondary-400 mb-2">24/7</div>
+                <div className="text-primary-200">Support Culture</div>
               </div>
               <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl text-center">
-                <div className="text-3xl font-bold text-purple-400 mb-2">∞</div>
-                <div className="text-purple-200">Learning Opportunities</div>
+                <div className="text-3xl font-bold text-primary-400 mb-2">∞</div>
+                <div className="text-primary-200">Learning Opportunities</div>
               </div>
               <div className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl text-center">
-                <div className="text-3xl font-bold text-yellow-400 mb-2">1</div>
-                <div className="text-purple-200">Team, One Vision</div>
+                <div className="text-3xl font-bold text-accent-400 mb-2">1</div>
+                <div className="text-primary-200">Team, One Vision</div>
               </div>
             </motion.div>
           </div>

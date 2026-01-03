@@ -14,7 +14,7 @@ const PrivacyPolicy = () => {
       className="pt-20"
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50">
+      <section ref={heroRef} className="py-24 bg-gradient-to-br from-primary-50 via-accent-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -28,7 +28,7 @@ const PrivacyPolicy = () => {
             
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
               Privacy{' '}
-              <span className="bg-gradient-to-r from-purple-600 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 bg-clip-text text-transparent">
                 Policy
               </span>
             </h1>
@@ -47,7 +47,7 @@ const PrivacyPolicy = () => {
           <div className="prose prose-lg max-w-none">
             
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-              <Database className="w-8 h-8 mr-3 text-purple-600" />
+              <Database className="w-8 h-8 mr-3 text-primary-600" />
               1. Information We Collect
             </h2>
             <p className="text-gray-600 mb-4">
@@ -70,7 +70,7 @@ const PrivacyPolicy = () => {
             </ul>
 
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-              <Eye className="w-8 h-8 mr-3 text-green-600" />
+              <Eye className="w-8 h-8 mr-3 text-secondary-600" />
               2. How We Use Your Information
             </h2>
             <p className="text-gray-600 mb-4">
@@ -87,7 +87,7 @@ const PrivacyPolicy = () => {
             </ul>
 
             <h2 className="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-              <Lock className="w-8 h-8 mr-3 text-blue-600" />
+              <Lock className="w-8 h-8 mr-3 text-primary-600" />
               3. Information Sharing and Disclosure
             </h2>
             <p className="text-gray-600 mb-4">
@@ -160,21 +160,21 @@ const PrivacyPolicy = () => {
             </p>
 
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Us</h2>
-            <div className="bg-gradient-to-br from-purple-50 to-green-50 p-8 rounded-2xl">
+            <div className="bg-gradient-to-br from-primary-50 to-secondary-50 p-8 rounded-2xl">
               <p className="text-gray-600 mb-6">
                 If you have any questions about this Privacy Policy or our data practices, please contact us:
               </p>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-purple-600" />
+                  <Mail className="w-5 h-5 text-primary-600" />
                   <span className="text-gray-700">maingijulius001@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Phone className="w-5 h-5 text-purple-600" />
+                  <Phone className="w-5 h-5 text-primary-600" />
                   <span className="text-gray-700">+254 705 494 094</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MapPin className="w-5 h-5 text-purple-600" />
+                  <MapPin className="w-5 h-5 text-primary-600" />
                   <span className="text-gray-700">Nairobi, Kenya</span>
                 </div>
               </div>

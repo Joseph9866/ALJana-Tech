@@ -167,7 +167,7 @@ const OurWork = () => {
       className="pt-20"
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50">
+      <section ref={heroRef} className="py-24 bg-gradient-to-br from-primary-50 via-accent-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -181,7 +181,7 @@ const OurWork = () => {
             
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
               Our{' '}
-              <span className="bg-gradient-to-r from-purple-600 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 bg-clip-text text-transparent">
                 Work
               </span>
             </h1>
@@ -204,7 +204,7 @@ const OurWork = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-200 text-sm ${
                   selectedCategory === category
-                    ? 'bg-gradient-to-r from-purple-600 to-green-500 text-white'
+                    ? 'bg-gradient-to-r from-primary-600 to-secondary-500 text-white'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -239,7 +239,7 @@ const OurWork = () => {
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                  <div className="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-purple-600 to-green-500 text-white text-xs font-medium rounded-full">
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-gradient-to-r from-primary-600 to-secondary-500 text-white text-xs font-medium rounded-full">
                     Featured
                   </div>
                   <div className="absolute bottom-4 left-4 text-white">
@@ -258,19 +258,19 @@ const OurWork = () => {
 
                 <div className="p-8">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-medium rounded-full">
+                    <span className="px-3 py-1 bg-primary-100 text-primary-700 text-xs font-medium rounded-full">
                       {project.category}
                     </span>
                     <a
                       href={project.link}
-                      className="w-10 h-10 bg-gradient-to-r from-purple-600 to-green-500 rounded-lg flex items-center justify-center text-white hover:from-purple-700 hover:to-green-600 transition-all duration-200"
+                      className="w-10 h-10 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-lg flex items-center justify-center text-white hover:from-primary-700 hover:to-secondary-600 transition-all duration-200"
                     >
                       <ExternalLink className="w-4 h-4" />
                     </a>
                   </div>
 
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                  <p className="text-purple-600 font-medium mb-4">{project.client}</p>
+                  <p className="text-primary-600 font-medium mb-4">{project.client}</p>
                   <p className="text-gray-600 mb-6 leading-relaxed">{project.description}</p>
 
                   {/* Services */}
@@ -293,15 +293,15 @@ const OurWork = () => {
                   </div>
 
                   {/* Results */}
-                  <div className="bg-gradient-to-r from-purple-50 to-green-50 p-6 rounded-xl">
+                  <div className="bg-gradient-to-r from-primary-50 to-secondary-50 p-6 rounded-xl">
                     <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
-                      <TrendingUp className="w-4 h-4 mr-2 text-green-600" />
+                      <TrendingUp className="w-4 h-4 mr-2 text-secondary-600" />
                       Key Results
                     </h4>
                     <ul className="space-y-2">
                       {project.results.map((result, resultIndex) => (
                         <li key={resultIndex} className="flex items-center text-sm text-gray-700">
-                          <div className="w-2 h-2 bg-gradient-to-r from-purple-600 to-green-500 rounded-full mr-3"></div>
+                          <div className="w-2 h-2 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-full mr-3"></div>
                           {result}
                         </li>
                       ))}
@@ -320,7 +320,7 @@ const OurWork = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
               All{' '}
-              <span className="bg-gradient-to-r from-purple-600 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                 Projects
               </span>
             </h2>
@@ -364,10 +364,10 @@ const OurWork = () => {
                     </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-200">
+                  <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors duration-200">
                     {project.title}
                   </h3>
-                  <p className="text-purple-600 font-medium mb-3">{project.client}</p>
+                  <p className="text-primary-600 font-medium mb-3">{project.client}</p>
                   <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                     {project.description.slice(0, 120)}...
                   </p>
@@ -377,13 +377,13 @@ const OurWork = () => {
                       {project.technologies.slice(0, 3).map((tech, techIndex) => (
                         <div
                           key={techIndex}
-                          className="w-2 h-2 bg-gradient-to-r from-purple-600 to-green-500 rounded-full"
+                          className="w-2 h-2 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-full"
                         ></div>
                       ))}
                     </div>
                     <a
                       href={project.link}
-                      className="inline-flex items-center text-purple-600 font-medium text-sm hover:text-purple-700 transition-colors"
+                      className="inline-flex items-center text-primary-600 font-medium text-sm hover:text-primary-700 transition-colors"
                     >
                       View Project
                       <ExternalLink className="w-3 h-3 ml-1" />
@@ -402,7 +402,7 @@ const OurWork = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-6">
               Our{' '}
-              <span className="bg-gradient-to-r from-purple-600 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                 Impact
               </span>
             </h2>
@@ -416,12 +416,12 @@ const OurWork = () => {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6 }}
-              className="text-center bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-2xl"
+              className="text-center bg-gradient-to-br from-primary-50 to-primary-100 p-8 rounded-2xl"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-purple-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Briefcase className="w-8 h-8 text-white" />
               </div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">50+</div>
+              <div className="text-4xl font-bold text-primary-600 mb-2">50+</div>
               <div className="text-gray-700 font-medium">Projects Completed</div>
             </motion.div>
 
@@ -429,12 +429,12 @@ const OurWork = () => {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-center bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-2xl"
+              className="text-center bg-gradient-to-br from-secondary-50 to-secondary-100 p-8 rounded-2xl"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-green-600 to-green-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-secondary-600 to-secondary-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Users className="w-8 h-8 text-white" />
               </div>
-              <div className="text-4xl font-bold text-green-600 mb-2">40+</div>
+              <div className="text-4xl font-bold text-secondary-600 mb-2">40+</div>
               <div className="text-gray-700 font-medium">Happy Clients</div>
             </motion.div>
 
@@ -442,12 +442,12 @@ const OurWork = () => {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-center bg-gradient-to-br from-yellow-50 to-yellow-100 p-8 rounded-2xl"
+              className="text-center bg-gradient-to-br from-accent-50 to-accent-100 p-8 rounded-2xl"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-yellow-600 to-yellow-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-accent-600 to-accent-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Globe className="w-8 h-8 text-white" />
               </div>
-              <div className="text-4xl font-bold text-yellow-600 mb-2">5+</div>
+              <div className="text-4xl font-bold text-accent-600 mb-2">5+</div>
               <div className="text-gray-700 font-medium">Countries Served</div>
             </motion.div>
 
@@ -455,12 +455,12 @@ const OurWork = () => {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-center bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-2xl"
+              className="text-center bg-gradient-to-br from-primary-50 to-primary-100 p-8 rounded-2xl"
             >
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-gradient-to-r from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Award className="w-8 h-8 text-white" />
               </div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">100%</div>
+              <div className="text-4xl font-bold text-primary-600 mb-2">100%</div>
               <div className="text-gray-700 font-medium">Success Rate</div>
             </motion.div>
           </div>
@@ -468,7 +468,7 @@ const OurWork = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-purple-900 via-purple-800 to-green-800 text-white">
+      <section className="py-24 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -477,11 +477,11 @@ const OurWork = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Ready to Create Your{' '}
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-accent-400 to-secondary-400 bg-clip-text text-transparent">
                 Success Story?
               </span>
             </h2>
-            <p className="text-xl text-purple-100 mb-10 max-w-3xl mx-auto">
+            <p className="text-xl text-primary-100 mb-10 max-w-3xl mx-auto">
               Let's work together to transform your business and achieve remarkable results. 
               Your success story could be our next featured project.
             </p>
@@ -489,7 +489,7 @@ const OurWork = () => {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 font-semibold rounded-xl hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-accent-400 to-accent-500 text-gray-900 font-semibold rounded-xl hover:from-accent-500 hover:to-accent-600 transition-all duration-300"
             >
               Start Your Project
               <ExternalLink className="w-5 h-5 ml-2" />

@@ -14,7 +14,7 @@ const TermsAndConditions = () => {
       className="pt-20"
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50">
+      <section ref={heroRef} className="py-24 bg-gradient-to-br from-primary-50 via-accent-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -28,7 +28,7 @@ const TermsAndConditions = () => {
             
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
               Terms &{' '}
-              <span className="bg-gradient-to-r from-purple-600 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 bg-clip-text text-transparent">
                 Conditions
               </span>
             </h1>
@@ -120,21 +120,21 @@ const TermsAndConditions = () => {
             </p>
 
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Contact Information</h2>
-            <div className="bg-gradient-to-br from-purple-50 to-green-50 p-8 rounded-2xl">
+            <div className="bg-gradient-to-br from-primary-50 to-secondary-50 p-8 rounded-2xl">
               <p className="text-gray-600 mb-6">
                 If you have any questions about these Terms and Conditions, please contact us:
               </p>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <Mail className="w-5 h-5 text-purple-600" />
+                  <Mail className="w-5 h-5 text-primary-600" />
                   <span className="text-gray-700">maingijulius001@gmail.com</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Phone className="w-5 h-5 text-purple-600" />
+                  <Phone className="w-5 h-5 text-primary-600" />
                   <span className="text-gray-700">+254 705 494 094</span>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MapPin className="w-5 h-5 text-purple-600" />
+                  <MapPin className="w-5 h-5 text-primary-600" />
                   <span className="text-gray-700">Nairobi, Kenya</span>
                 </div>
               </div>

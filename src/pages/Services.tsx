@@ -29,8 +29,8 @@ const Services = () => {
         'Print & Digital Collateral',
         'Brand Audits & Refreshes'
       ],
-      color: 'from-purple-500 to-purple-600',
-      bgColor: 'from-purple-50 to-purple-100'
+      color: 'from-primary-600 to-primary-700',
+      bgColor: 'from-primary-50 to-primary-100'
     },
     {
       icon: User,
@@ -43,8 +43,8 @@ const Services = () => {
         'Professional Photography Direction',
         'Thought Leadership Positioning'
       ],
-      color: 'from-pink-500 to-pink-600',
-      bgColor: 'from-pink-50 to-pink-100'
+      color: 'from-secondary-600 to-secondary-700',
+      bgColor: 'from-secondary-50 to-secondary-100'
     },
     {
       icon: Target,
@@ -57,8 +57,8 @@ const Services = () => {
         'PPC Advertising Management',
         'Analytics & Performance Tracking'
       ],
-      color: 'from-yellow-500 to-yellow-600',
-      bgColor: 'from-yellow-50 to-yellow-100'
+      color: 'from-accent-500 to-accent-600',
+      bgColor: 'from-accent-50 to-accent-100'
     },
     {
       icon: Code,
@@ -71,8 +71,8 @@ const Services = () => {
         'CMS Integration',
         'Website Maintenance & Support'
       ],
-      color: 'from-green-500 to-green-600',
-      bgColor: 'from-green-50 to-green-100'
+      color: 'from-secondary-600 to-secondary-700',
+      bgColor: 'from-secondary-50 to-secondary-100'
     },
     {
       icon: Cloud,
@@ -85,8 +85,8 @@ const Services = () => {
         'DevOps Implementation',
         'Cloud Security & Monitoring'
       ],
-      color: 'from-blue-500 to-blue-600',
-      bgColor: 'from-blue-50 to-blue-100'
+      color: 'from-primary-700 to-primary-800',
+      bgColor: 'from-primary-50 to-primary-100'
     },
     {
       icon: Sparkles,
@@ -99,8 +99,8 @@ const Services = () => {
         'Influencer Partnerships',
         'Social Media Advertising'
       ],
-      color: 'from-indigo-500 to-indigo-600',
-      bgColor: 'from-indigo-50 to-indigo-100'
+      color: 'from-primary-600 to-primary-700',
+      bgColor: 'from-primary-50 to-primary-100'
     },
     {
       icon: Search,
@@ -113,8 +113,8 @@ const Services = () => {
         'Link Building Campaigns',
         'Local SEO Services'
       ],
-      color: 'from-teal-500 to-teal-600',
-      bgColor: 'from-teal-50 to-teal-100'
+      color: 'from-secondary-600 to-secondary-700',
+      bgColor: 'from-secondary-50 to-secondary-100'
     }
   ];
 
@@ -126,21 +126,21 @@ const Services = () => {
       className="pt-20"
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50">
+      <section ref={heroRef} className="py-24 bg-gradient-to-br from-primary-50 via-white to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={heroInView ? { y: 0, opacity: 1 } : {}}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-100 to-green-100 text-purple-700 rounded-full text-sm font-medium mb-8">
+            <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-accent-100 to-accent-200 text-accent-800 rounded-full text-sm font-medium mb-8">
               <Target className="w-4 h-4 mr-2" />
               Comprehensive Digital Solutions
             </div>
-            
+
             <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
               Our{' '}
-              <span className="bg-gradient-to-r from-purple-600 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-900 via-secondary-600 to-accent-500 bg-clip-text text-transparent">
                 Services
               </span>
             </h1>
@@ -177,7 +177,7 @@ const Services = () => {
                     <ul className="space-y-3">
                       {service.features.map((feature, featureIndex) => (
                         <li key={featureIndex} className="flex items-center space-x-3">
-                          <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                          <CheckCircle className="w-5 h-5 text-accent-500 flex-shrink-0" />
                           <span className="text-gray-700">{feature}</span>
                         </li>
                       ))}
@@ -191,12 +191,12 @@ const Services = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-24 bg-gradient-to-br from-gray-50 to-purple-50">
+      <section className="py-24 bg-gradient-to-br from-gray-50 to-primary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Our{' '}
-              <span className="bg-gradient-to-r from-purple-600 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-900 to-secondary-600 bg-clip-text text-transparent">
                 Process
               </span>
             </h2>
@@ -219,7 +219,7 @@ const Services = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-purple-600 to-green-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary-900 to-secondary-600 rounded-full flex items-center justify-center mx-auto mb-6">
                   <span className="text-white font-bold text-lg">{phase.step}</span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{phase.title}</h3>
@@ -231,7 +231,7 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-br from-purple-900 via-purple-800 to-green-800 text-white">
+      <section className="py-24 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -240,18 +240,18 @@ const Services = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Ready to Get{' '}
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-accent-400 to-accent-500 bg-clip-text text-transparent">
                 Started?
               </span>
             </h2>
-            <p className="text-xl text-purple-100 mb-10 max-w-3xl mx-auto">
+            <p className="text-xl text-primary-100 mb-10 max-w-3xl mx-auto">
               Let's discuss your project and create a customized solution that drives results for your business.
             </p>
             <motion.a
               href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 font-semibold rounded-xl hover:from-yellow-500 hover:to-yellow-600 transition-all duration-300"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-accent-500 to-accent-600 text-white font-semibold rounded-xl hover:from-accent-600 hover:to-accent-700 transition-all duration-300"
             >
               Start Your Project
               <ArrowRight className="w-5 h-5 ml-2" />
