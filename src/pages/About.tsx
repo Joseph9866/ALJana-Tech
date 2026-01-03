@@ -22,7 +22,7 @@ const About = () => {
       icon: Lightbulb,
       title: 'Innovation',
       description: 'We push boundaries and embrace cutting-edge technologies to deliver exceptional results.',
-      color: 'from-yellow-500 to-yellow-600'
+      color: 'from-accent-500 to-accent-600'
     },
     {
       icon: Heart,
@@ -34,13 +34,13 @@ const About = () => {
       icon: Users,
       title: 'Collaboration',
       description: 'We believe in the power of partnership. Your success is our success.',
-      color: 'from-blue-500 to-blue-600'
+      color: 'from-primary-500 to-primary-600'
     },
     {
       icon: Award,
       title: 'Excellence',
       description: 'We never settle for good enough. Excellence is our standard, not our goal.',
-      color: 'from-purple-500 to-purple-600'
+      color: 'from-primary-500 to-primary-600'
     }
   ];
 
@@ -59,7 +59,7 @@ const About = () => {
       className="pt-20"
     >
       {/* Hero Section */}
-      <section ref={heroRef} className="py-24 bg-gradient-to-br from-purple-50 via-yellow-50 to-green-50">
+      <section ref={heroRef} className="py-24 bg-gradient-to-br from-primary-50 via-accent-50 to-secondary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -67,14 +67,14 @@ const About = () => {
               animate={heroInView ? { x: 0, opacity: 1 } : {}}
               transition={{ duration: 0.8 }}
             >
-              <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-100 to-green-100 text-purple-700 rounded-full text-sm font-medium mb-8">
+              <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-100 to-secondary-100 text-primary-700 rounded-full text-sm font-medium mb-8">
                 <Globe className="w-4 h-4 mr-2" />
                 Creative & Tech-Driven Agency
               </div>
               
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
                 We Are{' '}
-                <span className="bg-gradient-to-r from-purple-600 via-yellow-500 to-green-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-primary-600 via-accent-500 to-secondary-500 bg-clip-text text-transparent">
                   ALJana Tech
                 </span>
               </h1>
@@ -96,26 +96,26 @@ const About = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-gradient-to-br from-purple-600 via-yellow-500 to-green-500 p-1 rounded-3xl">
+              <div className="bg-gradient-to-br from-primary-600 via-accent-500 to-secondary-500 p-1 rounded-3xl">
                 <div className="bg-white p-8 rounded-3xl">
                   <div className="grid grid-cols-2 gap-6">
                     <div className="text-center">
-                      <Target className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+                      <Target className="w-12 h-12 text-primary-600 mx-auto mb-4" />
                       <h3 className="font-bold text-gray-900 mb-2">Strategic</h3>
                       <p className="text-sm text-gray-600">Data-driven approach</p>
                     </div>
                     <div className="text-center">
-                      <Zap className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
+                      <Zap className="w-12 h-12 text-accent-500 mx-auto mb-4" />
                       <h3 className="font-bold text-gray-900 mb-2">Innovative</h3>
                       <p className="text-sm text-gray-600">Cutting-edge solutions</p>
                     </div>
                     <div className="text-center">
-                      <Users className="w-12 h-12 text-green-600 mx-auto mb-4" />
+                      <Users className="w-12 h-12 text-secondary-600 mx-auto mb-4" />
                       <h3 className="font-bold text-gray-900 mb-2">Collaborative</h3>
                       <p className="text-sm text-gray-600">Partnership focused</p>
                     </div>
                     <div className="text-center">
-                      <Award className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+                      <Award className="w-12 h-12 text-primary-600 mx-auto mb-4" />
                       <h3 className="font-bold text-gray-900 mb-2">Excellence</h3>
                       <p className="text-sm text-gray-600">Quality guaranteed</p>
                     </div>
@@ -138,7 +138,7 @@ const About = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Our{' '}
-              <span className="bg-gradient-to-r from-purple-600 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                 Values
               </span>
             </h2>
@@ -168,7 +168,7 @@ const About = () => {
       </section>
 
       {/* Stats Section */}
-      <section ref={statsRef} className="py-24 bg-gradient-to-br from-gray-50 to-purple-50">
+      <section ref={statsRef} className="py-24 bg-gradient-to-br from-gray-50 to-primary-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ y: 50, opacity: 0 }}
@@ -178,7 +178,7 @@ const About = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
               Our{' '}
-              <span className="bg-gradient-to-r from-purple-600 to-green-500 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 to-secondary-500 bg-clip-text text-transparent">
                 Impact
               </span>
             </h2>
@@ -196,7 +196,7 @@ const About = () => {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-center bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <stat.icon className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+                <stat.icon className="w-12 h-12 text-primary-600 mx-auto mb-4" />
                 <div className="text-4xl font-bold text-gray-900 mb-2">{stat.number}</div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
               </motion.div>
@@ -206,7 +206,7 @@ const About = () => {
       </section>
 
       {/* Mission Statement */}
-      <section className="py-24 bg-gradient-to-br from-purple-900 via-purple-800 to-green-800 text-white">
+      <section className="py-24 bg-gradient-to-br from-primary-900 via-primary-800 to-secondary-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -215,11 +215,11 @@ const About = () => {
           >
             <h2 className="text-4xl md:text-5xl font-bold mb-8">
               Our{' '}
-              <span className="bg-gradient-to-r from-yellow-400 to-green-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-accent-400 to-secondary-400 bg-clip-text text-transparent">
                 Mission
               </span>
             </h2>
-            <p className="text-2xl text-purple-100 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-2xl text-primary-100 max-w-4xl mx-auto leading-relaxed">
               "To empower businesses with innovative design and technology solutions that 
               create meaningful connections, drive growth, and transform brands into 
               powerful forces for positive change."
