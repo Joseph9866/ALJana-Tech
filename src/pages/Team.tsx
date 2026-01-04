@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import {
@@ -11,44 +11,26 @@ import {
   Target,
   Zap
 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { useRealTimeData } from '../lib/useRealTimeData';
 
 const Team = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
   const [teamRef, teamInView] = useInView({ threshold: 0.2, triggerOnce: true });
-  const [teamMembers, setTeamMembers] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const { data: teamData, isLoading, error } = useRealTimeData('team_members', { column: 'is_active', value: true });
 
-  useEffect(() => {
-    loadTeamMembers();
-  }, []);
-
-  const loadTeamMembers = async () => {
-    try {
-      const { data, error } = await supabase
-        .from('team_members')
-        .select('*')
-        .eq('is_active', true)
-        .order('order_index', { ascending: true });
-
-      if (error) throw error;
-
-      const formattedMembers = data?.map((member: any) => ({
+  // Sort and format the data
+  const teamMembers = useMemo(() => {
+    return teamData
+      .sort((a, b) => a.order_index - b.order_index)
+      .map((member: any) => ({
         name: member.name,
         role: member.role,
         bio: member.bio || '',
         image: member.image_url || '',
         skills: member.skills || [],
         social: member.social_links || { linkedin: '#', twitter: '#', email: '' }
-      })) || [];
-
-      setTeamMembers(formattedMembers);
-    } catch (error) {
-      console.error('Error loading team members:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+      }));
+  }, [teamData]);
 
   const getSkillIcon = (skill: string) => {
     if (skill.includes('Design') || skill.includes('Brand')) return Palette;

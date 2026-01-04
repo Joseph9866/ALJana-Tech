@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -10,79 +10,89 @@ import {
   TrendingUp,
   Users
 } from 'lucide-react';
+import { useRealTimeData } from '../lib/useRealTimeData';
 
 const Testimonials = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { data: testimonialData, isLoading } = useRealTimeData('testimonials');
 
-  const testimonials = [
-    {
-      name: 'Sarah Wanjiku',
-      company: 'TechHub Kenya',
-      role: 'CEO & Founder',
-      image: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 5,
-      text: 'ALJana Tech completely transformed our brand identity. Their understanding of the tech ecosystem and ability to translate our vision into a compelling brand story was exceptional. The new identity has significantly improved our market position and investor confidence.',
-      project: 'Complete Brand Transformation',
-      results: ['85% increase in brand recognition', '200% increase in investor inquiries', '150% increase in startup applications'],
-      category: 'Brand Identity'
-    },
-    {
-      name: 'Michael Ochieng',
-      company: 'EcoFarm Initiative',
-      role: 'Program Director',
-      image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 5,
-      text: 'The digital marketing campaign created by ALJana Tech exceeded all our expectations. Their strategic approach to social media and content marketing helped us reach farmers across Kenya and significantly increased program enrollment. The results speak for themselves.',
-      project: 'Digital Marketing Campaign',
-      results: ['300% increase in social engagement', '250% increase in farmer enrollment', '400% increase in website traffic'],
-      category: 'Digital Marketing'
-    },
-    {
-      name: 'Grace Nyong\'o',
-      company: 'Nairobi Fashion Week',
-      role: 'Creative Director',
-      image: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 5,
-      text: 'Working with ALJana Tech was a dream come true. They captured the essence of African fashion and created a brand identity that truly represents our vision. The website and digital platform they built has attracted international attention and elevated our event to new heights.',
-      project: 'Event Branding & Digital Platform',
-      results: ['180% increase in international visitors', '220% increase in designer applications', '160% increase in ticket sales'],
-      category: 'Branding & Web Development'
-    },
-    {
-      name: 'Rev. David Kimani',
-      company: 'ACK Guest House Nyeri',
-      role: 'General Manager',
-      image: 'https://images.pexels.com/photos/2182973/pexels-photo-2182973.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 5,
-      text: 'The new website and booking system developed by ALJana Tech has revolutionized our business. We\'ve seen a dramatic increase in direct bookings and our online presence has improved significantly. Their attention to detail and understanding of the hospitality industry was impressive.',
-      project: 'Website Development & Booking System',
-      results: ['190% increase in direct bookings', '250% improvement in search rankings', '170% increase in user engagement'],
-      category: 'Web Development'
-    },
-    {
-      name: 'Amina Hassan',
-      company: 'Kilifi Artisan Collective',
-      role: 'Founder',
-      image: 'https://images.pexels.com/photos/3763152/pexels-photo-3763152.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 5,
-      text: 'ALJana Tech helped us build a strong online presence that showcases our artisans\' work beautifully. Their social media strategy and e-commerce platform have opened up new markets for our products. We\'ve gone from local sales to international orders.',
-      project: 'E-commerce Platform & Social Media Strategy',
-      results: ['300% increase in online sales', '500% growth in social media following', '150% increase in international orders'],
-      category: 'E-commerce & Social Media'
-    },
-    {
-      name: 'Dr. James Mwangi',
-      company: 'Nairobi Medical Center',
-      role: 'Chief Medical Officer',
-      image: 'https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=400',
-      rating: 5,
-      text: 'The digital transformation of our medical center by ALJana Tech has improved patient experience significantly. The new appointment system, patient portal, and digital marketing strategy have modernized our operations and attracted new patients.',
-      project: 'Healthcare Digital Transformation',
-      results: ['200% increase in online appointments', '150% improvement in patient satisfaction', '180% increase in new patient registrations'],
-      category: 'Healthcare Technology'
+  // Use database testimonials if available, otherwise use fallback
+  const testimonials = useMemo(() => {
+    if (testimonialData && testimonialData.length > 0) {
+      return testimonialData;
     }
-  ];
+    
+    // Fallback testimonials
+    return [
+      {
+        client_name: 'Sarah Wanjiku',
+        company: 'TechHub Kenya',
+        role: 'CEO & Founder',
+        image_url: 'https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=400',
+        rating: 5,
+        testimonial_text: 'ALJana Tech completely transformed our brand identity. Their understanding of the tech ecosystem and ability to translate our vision into a compelling brand story was exceptional. The new identity has significantly improved our market position and investor confidence.',
+        project_title: 'Complete Brand Transformation',
+        results: ['85% increase in brand recognition', '200% increase in investor inquiries', '150% increase in startup applications'],
+        category: 'Brand Identity'
+      },
+      {
+        client_name: 'Michael Ochieng',
+        company: 'EcoFarm Initiative',
+        role: 'Program Director',
+        image_url: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400',
+        rating: 5,
+        testimonial_text: 'The digital marketing campaign created by ALJana Tech exceeded all our expectations. Their strategic approach to social media and content marketing helped us reach farmers across Kenya and significantly increased program enrollment. The results speak for themselves.',
+        project_title: 'Digital Marketing Campaign',
+        results: ['300% increase in social engagement', '250% increase in farmer enrollment', '400% increase in website traffic'],
+        category: 'Digital Marketing'
+      },
+      {
+        client_name: 'Grace Nyong\'o',
+        company: 'Nairobi Fashion Week',
+        role: 'Creative Director',
+        image_url: 'https://images.pexels.com/photos/3756679/pexels-photo-3756679.jpeg?auto=compress&cs=tinysrgb&w=400',
+        rating: 5,
+        testimonial_text: 'Working with ALJana Tech was a dream come true. They captured the essence of African fashion and created a brand identity that truly represents our vision. The website and digital platform they built has attracted international attention and elevated our event to new heights.',
+        project_title: 'Event Branding & Digital Platform',
+        results: ['180% increase in international visitors', '220% increase in designer applications', '160% increase in ticket sales'],
+        category: 'Branding & Web Development'
+      },
+      {
+        client_name: 'Rev. David Kimani',
+        company: 'ACK Guest House Nyeri',
+        role: 'General Manager',
+        image_url: 'https://images.pexels.com/photos/2182973/pexels-photo-2182973.jpeg?auto=compress&cs=tinysrgb&w=400',
+        rating: 5,
+        testimonial_text: 'The new website and booking system developed by ALJana Tech has revolutionized our business. We\'ve seen a dramatic increase in direct bookings and our online presence has improved significantly. Their attention to detail and understanding of the hospitality industry was impressive.',
+        project_title: 'Website Development & Booking System',
+        results: ['190% increase in direct bookings', '250% improvement in search rankings', '170% increase in user engagement'],
+        category: 'Web Development'
+      },
+      {
+        client_name: 'Amina Hassan',
+        company: 'Kilifi Artisan Collective',
+        role: 'Founder',
+        image_url: 'https://images.pexels.com/photos/3763152/pexels-photo-3763152.jpeg?auto=compress&cs=tinysrgb&w=400',
+        rating: 5,
+        testimonial_text: 'ALJana Tech helped us build a strong online presence that showcases our artisans\' work beautifully. Their social media strategy and e-commerce platform have opened up new markets for our products. We\'ve gone from local sales to international orders.',
+        project_title: 'E-commerce Platform & Social Media Strategy',
+        results: ['300% increase in online sales', '500% growth in social media following', '150% increase in international orders'],
+        category: 'E-commerce & Social Media'
+      },
+      {
+        client_name: 'Dr. James Mwangi',
+        company: 'Nairobi Medical Center',
+        role: 'Chief Medical Officer',
+        image_url: 'https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=400',
+        rating: 5,
+        testimonial_text: 'The digital transformation of our medical center by ALJana Tech has improved patient experience significantly. The new appointment system, patient portal, and digital marketing strategy have modernized our operations and attracted new patients.',
+        project_title: 'Healthcare Digital Transformation',
+        results: ['200% increase in online appointments', '150% improvement in patient satisfaction', '180% increase in new patient registrations'],
+        category: 'Healthcare Technology'
+      }
+    ];
+  }, [testimonialData]);
 
   // Auto-advance testimonials
   useEffect(() => {
@@ -165,18 +175,18 @@ const Testimonials = () => {
                 <div className="relative mb-8">
                   <Quote className="w-12 h-12 text-primary-200 absolute -top-4 -left-2" />
                   <p className="text-2xl text-gray-700 leading-relaxed pl-8 italic">
-                    {currentTestimonial.text}
+                    {currentTestimonial.testimonial_text}
                   </p>
                 </div>
 
                 <div className="flex items-center mb-8">
                   <img
-                    src={currentTestimonial.image}
-                    alt={currentTestimonial.name}
+                    src={currentTestimonial.image_url}
+                    alt={currentTestimonial.client_name}
                     className="w-16 h-16 rounded-full object-cover mr-4"
                   />
                   <div>
-                    <div className="font-bold text-gray-900 text-lg">{currentTestimonial.name}</div>
+                    <div className="font-bold text-gray-900 text-lg">{currentTestimonial.client_name}</div>
                     <div className="text-primary-600 font-medium">{currentTestimonial.role}</div>
                     <div className="text-gray-600">{currentTestimonial.company}</div>
                   </div>
@@ -185,7 +195,7 @@ const Testimonials = () => {
                 <div className="bg-gradient-to-br from-primary-50 to-secondary-50 p-6 rounded-2xl">
                   <h4 className="font-bold text-gray-900 mb-4 flex items-center">
                     <TrendingUp className="w-5 h-5 mr-2 text-secondary-600" />
-                    Project: {currentTestimonial.project}
+                    Project: {currentTestimonial.project_title}
                   </h4>
                   <ul className="space-y-2">
                     {currentTestimonial.results.map((result, index) => (

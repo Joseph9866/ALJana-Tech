@@ -25,6 +25,8 @@ Deno.serve(async (req: Request) => {
     if (path.endsWith('/login') && req.method === 'POST') {
       const { email, password } = await req.json();
 
+      console.log('Login attempt for email:', email);
+
       if (!email || !password) {
         return new Response(
           JSON.stringify({ error: 'Email and password are required' }),
@@ -42,9 +44,13 @@ Deno.serve(async (req: Request) => {
         .eq('is_active', true)
         .maybeSingle();
 
+      console.log('Admin lookup error:', error);
+      console.log('Admin found:', !!admin);
+      if (admin) console.log('Admin data:', { id: admin.id, email: admin.email, password_hash: admin.password_hash });
+
       if (error || !admin) {
         return new Response(
-          JSON.stringify({ error: 'Invalid credentials' }),
+          JSON.stringify({ error: 'Invalid credentials - user not found', details: { error: error?.message, adminFound: !!admin } }),
           {
             status: 401,
             headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -58,9 +64,14 @@ Deno.serve(async (req: Request) => {
       const hashArray = Array.from(new Uint8Array(hashBuffer));
       const passwordHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
+      console.log('Provided password:', password);
+      console.log('Computed hash:', passwordHash);
+      console.log('Stored hash:', admin.password_hash);
+      console.log('Match:', passwordHash === admin.password_hash);
+
       if (passwordHash !== admin.password_hash) {
         return new Response(
-          JSON.stringify({ error: 'Invalid credentials' }),
+          JSON.stringify({ error: 'Invalid credentials', debug: { provided: passwordHash, stored: admin.password_hash } }),
           {
             status: 401,
             headers: { ...corsHeaders, 'Content-Type': 'application/json' },

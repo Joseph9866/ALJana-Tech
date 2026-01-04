@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -19,90 +19,99 @@ import {
   Cloud,
   Sparkles
 } from 'lucide-react';
+import { useRealTimeData } from '../lib/useRealTimeData';
 
 const OurWork = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
   const [portfolioRef, portfolioInView] = useInView({ threshold: 0.2, triggerOnce: true });
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const { data: projectsData } = useRealTimeData('projects');
 
   const categories = ['All', 'Brand Identity', 'Web Development', 'Digital Marketing', 'Cloud Solutions', 'E-commerce'];
 
-  const projects = [
-    {
-      id: 1,
-      title: 'TechHub Kenya Brand Transformation',
-      category: 'Brand Identity',
-      client: 'TechHub Kenya',
-      location: 'Nairobi, Kenya',
-      year: '2024',
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'Complete brand identity redesign for Kenya\'s leading tech incubator, including logo, visual identity, and brand guidelines.',
-      services: ['Brand Strategy', 'Logo Design', 'Visual Identity', 'Brand Guidelines'],
-      results: [
-        '85% increase in brand recognition',
-        '200% increase in startup applications',
-        '150% growth in investor inquiries'
-      ],
-      technologies: ['Adobe Creative Suite', 'Figma', 'Brand Guidelines'],
-      link: '#',
-      featured: true
-    },
-    {
-      id: 2,
-      title: 'ACK Guest House Booking System',
-      category: 'Web Development',
-      client: 'ACK Guest House Nyeri',
-      location: 'Nyeri, Kenya',
-      year: '2024',
-      image: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'Modern booking system and website redesign for a leading hospitality business in Central Kenya.',
-      services: ['Web Development', 'Booking System', 'SEO Optimization', 'Mobile Optimization'],
-      results: [
-        '190% increase in direct bookings',
-        '250% improvement in search rankings',
-        '170% increase in user engagement'
-      ],
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe API'],
-      link: '#',
-      featured: true
-    },
-    {
-      id: 3,
-      title: 'EcoFarm Initiative Digital Campaign',
-      category: 'Digital Marketing',
-      client: 'EcoFarm Initiative',
-      location: 'Kenya',
-      year: '2024',
-      image: 'https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'Comprehensive digital marketing campaign to connect with farmers across Kenya and promote sustainable farming practices.',
-      services: ['Social Media Marketing', 'Content Strategy', 'Email Marketing', 'Analytics'],
-      results: [
-        '300% increase in social engagement',
-        '250% increase in farmer enrollment',
-        '400% increase in website traffic'
-      ],
-      technologies: ['Facebook Ads', 'Google Analytics', 'Mailchimp', 'Hootsuite'],
-      link: '#',
-      featured: false
-    },
-    
-    {
-      id: 6,
-      title: 'Nairobi Medical Center Digital Transformation',
-      category: 'Cloud Solutions',
-      client: 'Nairobi Medical Center',
-      location: 'Nairobi, Kenya',
-      year: '2023',
-      image: 'https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=800',
-      description: 'Complete digital transformation including patient portal, appointment system, and cloud infrastructure.',
-      services: ['Cloud Migration', 'Patient Portal', 'Appointment System', 'Data Security'],
-      results: [
-        '200% increase in online appointments',
+  // Use database projects if available, otherwise use fallback
+  const projects = useMemo(() => {
+    if (projectsData && projectsData.length > 0) {
+      return projectsData;
+    }
+
+    // Fallback projects
+    return [
+      {
+        id: 1,
+        title: 'TechHub Kenya Brand Transformation',
+        category: 'Brand Identity',
+        client: 'TechHub Kenya',
+        location: 'Nairobi, Kenya',
+        year: '2024',
+        image_url: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800',
+        description: 'Complete brand identity redesign for Kenya\'s leading tech incubator, including logo, visual identity, and brand guidelines.',
+        services: ['Brand Strategy', 'Logo Design', 'Visual Identity', 'Brand Guidelines'],
+        results: [
+          '85% increase in brand recognition',
+          '200% increase in startup applications',
+          '150% growth in investor inquiries'
+        ],
+        technologies: ['Adobe Creative Suite', 'Figma', 'Brand Guidelines'],
+        project_url: '#',
+        featured: true
+      },
+      {
+        id: 2,
+        title: 'ACK Guest House Booking System',
+        category: 'Web Development',
+        client: 'ACK Guest House Nyeri',
+        location: 'Nyeri, Kenya',
+        year: '2024',
+        image_url: 'https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&w=800',
+        description: 'Modern booking system and website redesign for a leading hospitality business in Central Kenya.',
+        services: ['Web Development', 'Booking System', 'SEO Optimization', 'Mobile Optimization'],
+        results: [
+          '190% increase in direct bookings',
+          '250% improvement in search rankings',
+          '170% increase in user engagement'
+        ],
+        technologies: ['React', 'Node.js', 'MongoDB', 'Stripe API'],
+        project_url: '#',
+        featured: true
+      },
+      {
+        id: 3,
+        title: 'EcoFarm Initiative Digital Campaign',
+        category: 'Digital Marketing',
+        client: 'EcoFarm Initiative',
+        location: 'Kenya',
+        year: '2024',
+        image_url: 'https://images.pexels.com/photos/1595104/pexels-photo-1595104.jpeg?auto=compress&cs=tinysrgb&w=800',
+        description: 'Comprehensive digital marketing campaign to connect with farmers across Kenya and promote sustainable farming practices.',
+        services: ['Social Media Marketing', 'Content Strategy', 'Email Marketing', 'Analytics'],
+        results: [
+          '300% increase in social engagement',
+          '250% increase in farmer enrollment',
+          '400% increase in website traffic'
+        ],
+        technologies: ['Facebook Ads', 'Google Analytics', 'Mailchimp', 'Hootsuite'],
+        project_url: '#',
+        featured: false
+      },
+      
+      {
+        id: 6,
+        title: 'Nairobi Medical Center Digital Transformation',
+        category: 'Cloud Solutions',
+        client: 'Nairobi Medical Center',
+        location: 'Nairobi, Kenya',
+        year: '2023',
+        image_url: 'https://images.pexels.com/photos/263402/pexels-photo-263402.jpeg?auto=compress&cs=tinysrgb&w=800',
+        description: 'Complete digital transformation including patient portal, appointment system, and cloud infrastructure.',
+        services: ['Cloud Migration', 'Patient Portal', 'Appointment System', 'Data Security'],
+        results: [
+          '200% increase in online appointments',
         '150% improvement in patient satisfaction',
         '180% increase in new patient registrations'
       ],
       technologies: ['AWS', 'React', 'Node.js', 'PostgreSQL'],
-      link: '#',
+      project_url: '#',
       featured: false
     },
     {
@@ -112,7 +121,7 @@ const OurWork = () => {
       client: 'Green Energy Solutions',
       location: 'Mombasa, Kenya',
       year: '2023',
-      image: 'https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image_url: 'https://images.pexels.com/photos/433308/pexels-photo-433308.jpeg?auto=compress&cs=tinysrgb&w=800',
       description: 'Sustainable energy company brand identity reflecting innovation and environmental consciousness.',
       services: ['Brand Strategy', 'Logo Design', 'Marketing Materials', 'Website Design'],
       results: [
@@ -121,7 +130,7 @@ const OurWork = () => {
         '90% improvement in brand perception'
       ],
       technologies: ['Adobe Creative Suite', 'Figma', 'WordPress'],
-      link: '#',
+      project_url: '#',
       featured: false
     },
     {
@@ -131,7 +140,7 @@ const OurWork = () => {
       client: 'Innovation Hub',
       location: 'Kisumu, Kenya',
       year: '2023',
-      image: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image_url: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
       description: 'Digital marketing strategy to attract startups and investors to Western Kenya\'s innovation ecosystem.',
       services: ['Digital Strategy', 'Content Marketing', 'SEO', 'Social Media Management'],
       results: [
@@ -140,10 +149,11 @@ const OurWork = () => {
         '180% increase in investor interest'
       ],
       technologies: ['Google Ads', 'Facebook Ads', 'SEMrush', 'Buffer'],
-      link: '#',
+      project_url: '#',
       featured: false
     }
-  ];
+    ];
+  }, [projectsData]);
 
   const filteredProjects = selectedCategory === 'All' 
     ? projects 
@@ -234,7 +244,7 @@ const OurWork = () => {
               >
                 <div className="relative h-64 overflow-hidden">
                   <img
-                    src={project.image}
+                    src={project.image_url}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
@@ -262,7 +272,7 @@ const OurWork = () => {
                       {project.category}
                     </span>
                     <a
-                      href={project.link}
+                      href={project.project_url}
                       className="w-10 h-10 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-lg flex items-center justify-center text-white hover:from-primary-700 hover:to-secondary-600 transition-all duration-200"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -340,7 +350,7 @@ const OurWork = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={project.image}
+                    src={project.image_url}
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
@@ -382,7 +392,7 @@ const OurWork = () => {
                       ))}
                     </div>
                     <a
-                      href={project.link}
+                      href={project.project_url}
                       className="inline-flex items-center text-primary-600 font-medium text-sm hover:text-primary-700 transition-colors"
                     >
                       View Project

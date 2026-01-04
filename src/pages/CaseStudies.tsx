@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -17,104 +17,113 @@ import {
   CheckCircle,
   AlertTriangle
 } from 'lucide-react';
+import { useRealTimeData } from '../lib/useRealTimeData';
 
 const CaseStudies = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
   const [studiesRef, studiesInView] = useInView({ threshold: 0.2, triggerOnce: true });
   const [selectedStudy, setSelectedStudy] = useState(0);
+  const { data: caseStudiesData } = useRealTimeData('case_studies');
 
-  const caseStudies = [
-    {
-      title: 'Cloud Computing vs Traditional Infrastructure: Cost Analysis Study',
-      category: 'Cloud Computing Research',
-      duration: '6-month study',
-      image: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800',
-      overview: 'Comprehensive analysis of 150 companies comparing cloud adoption costs versus traditional on-premise infrastructure over a 3-year period.',
-      methodology: 'We analyzed financial data from 150 companies (75 cloud-first, 75 traditional infrastructure) across various industries including healthcare, finance, retail, and manufacturing.',
-      keyFindings: [
-        'Companies using cloud infrastructure save an average of 23% on IT operational costs',
-        'Cloud adoption reduces time-to-market for new products by 40%',
-        'Traditional infrastructure requires 3x more IT staff for maintenance',
-        'Cloud users experience 99.9% uptime vs 97.2% for traditional setups'
-      ],
-      statistics: [
-        { metric: 'Cost Savings', value: '23%', description: 'Average reduction in IT operational costs', icon: DollarSign },
-        { metric: 'Faster Deployment', value: '40%', description: 'Reduction in time-to-market', icon: Zap },
-        { metric: 'Staff Efficiency', value: '3x', description: 'Less IT staff needed for maintenance', icon: Users },
-        { metric: 'Uptime Improvement', value: '2.7%', description: 'Better system availability', icon: Shield }
-      ],
-      detailedAnalysis: {
-        costBreakdown: [
-          { category: 'Hardware Costs', traditional: '$120,000', cloud: '$45,000', savings: '62%' },
-          { category: 'Maintenance', traditional: '$80,000', cloud: '$25,000', savings: '69%' },
-          { category: 'Staff Costs', traditional: '$200,000', cloud: '$75,000', savings: '62%' },
-          { category: 'Energy Costs', traditional: '$35,000', cloud: '$8,000', savings: '77%' }
+  // Use database case studies if available, otherwise use fallback
+  const caseStudies = useMemo(() => {
+    if (caseStudiesData && caseStudiesData.length > 0) {
+      return caseStudiesData;
+    }
+
+    // Fallback case studies
+    return [
+      {
+        title: 'Cloud Computing vs Traditional Infrastructure: Cost Analysis Study',
+        category: 'Cloud Computing Research',
+        duration: '6-month study',
+        image_url: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800',
+        overview: 'Comprehensive analysis of 150 companies comparing cloud adoption costs versus traditional on-premise infrastructure over a 3-year period.',
+        methodology: 'We analyzed financial data from 150 companies (75 cloud-first, 75 traditional infrastructure) across various industries including healthcare, finance, retail, and manufacturing.',
+        key_findings: [
+          'Companies using cloud infrastructure save an average of 23% on IT operational costs',
+          'Cloud adoption reduces time-to-market for new products by 40%',
+          'Traditional infrastructure requires 3x more IT staff for maintenance',
+          'Cloud users experience 99.9% uptime vs 97.2% for traditional setups'
         ],
-        industries: [
-          { name: 'Healthcare', cloudAdoption: '78%', avgSavings: '28%' },
-          { name: 'Finance', cloudAdoption: '85%', avgSavings: '31%' },
-          { name: 'Retail', cloudAdoption: '72%', avgSavings: '25%' },
-          { name: 'Manufacturing', cloudAdoption: '65%', avgSavings: '20%' }
+        statistics: [
+          { metric: 'Cost Savings', value: '23%', description: 'Average reduction in IT operational costs', icon: DollarSign },
+          { metric: 'Faster Deployment', value: '40%', description: 'Reduction in time-to-market', icon: Zap },
+          { metric: 'Staff Efficiency', value: '3x', description: 'Less IT staff needed for maintenance', icon: Users },
+          { metric: 'Uptime Improvement', value: '2.7%', description: 'Better system availability', icon: Shield }
+        ],
+        detailed_analysis: {
+          costBreakdown: [
+            { category: 'Hardware Costs', traditional: '$120,000', cloud: '$45,000', savings: '62%' },
+            { category: 'Maintenance', traditional: '$80,000', cloud: '$25,000', savings: '69%' },
+            { category: 'Staff Costs', traditional: '$200,000', cloud: '$75,000', savings: '62%' },
+            { category: 'Energy Costs', traditional: '$35,000', cloud: '$8,000', savings: '77%' }
+          ],
+          industries: [
+            { name: 'Healthcare', cloudAdoption: '78%', avgSavings: '28%' },
+            { name: 'Finance', cloudAdoption: '85%', avgSavings: '31%' },
+            { name: 'Retail', cloudAdoption: '72%', avgSavings: '25%' },
+            { name: 'Manufacturing', cloudAdoption: '65%', avgSavings: '20%' }
+          ]
+        },
+        conclusion: 'Cloud computing demonstrates clear financial and operational advantages, with most companies seeing ROI within 18 months of migration.',
+        recommendations: [
+          'Start with non-critical applications for cloud migration',
+          'Invest in staff training for cloud technologies',
+          'Implement proper cloud governance and cost monitoring',
+          'Consider hybrid cloud solutions for sensitive data'
         ]
       },
-      conclusion: 'Cloud computing demonstrates clear financial and operational advantages, with most companies seeing ROI within 18 months of migration.',
-      recommendations: [
-        'Start with non-critical applications for cloud migration',
-        'Invest in staff training for cloud technologies',
-        'Implement proper cloud governance and cost monitoring',
-        'Consider hybrid cloud solutions for sensitive data'
-      ]
-    },
-    {
-      title: 'Digital Marketing ROI: Traditional vs Digital Advertising Effectiveness',
-      category: 'Digital Marketing Research',
-      duration: '12-month study',
-      image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
-      overview: 'Analysis of advertising effectiveness across 200 businesses comparing traditional marketing channels with digital marketing strategies.',
-      methodology: 'Tracked marketing spend and conversion rates across 200 businesses over 12 months, comparing traditional advertising (TV, radio, print) with digital channels (social media, search, email).',
-      keyFindings: [
-        'Digital marketing generates 2.8x higher ROI than traditional advertising',
-        'Social media advertising has the highest engagement rate at 3.2%',
-        'Email marketing delivers the best ROI at 4200% return on investment',
-        'Digital campaigns can be optimized in real-time, improving performance by 45%'
-      ],
-      statistics: [
-        { metric: 'ROI Advantage', value: '2.8x', description: 'Higher returns from digital marketing', icon: TrendingUp },
-        { metric: 'Email Marketing ROI', value: '4200%', description: 'Return on email marketing investment', icon: DollarSign },
-        { metric: 'Real-time Optimization', value: '45%', description: 'Performance improvement capability', icon: BarChart3 },
-        { metric: 'Targeting Precision', value: '85%', description: 'Accuracy in reaching target audience', icon: Users }
-      ],
-      detailedAnalysis: {
-        channelComparison: [
-          { channel: 'Social Media Ads', avgROI: '320%', engagementRate: '3.2%', costPerLead: '$12' },
-          { channel: 'Google Ads', avgROI: '280%', engagementRate: '2.8%', costPerLead: '$15' },
-          { channel: 'Email Marketing', avgROI: '4200%', engagementRate: '18%', costPerLead: '$2' },
-          { channel: 'Traditional TV', avgROI: '120%', engagementRate: '0.8%', costPerLead: '$45' },
-          { channel: 'Print Advertising', avgROI: '95%', engagementRate: '0.3%', costPerLead: '$65' }
+      {
+        title: 'Digital Marketing ROI: Traditional vs Digital Advertising Effectiveness',
+        category: 'Digital Marketing Research',
+        duration: '12-month study',
+        image_url: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
+        overview: 'Analysis of advertising effectiveness across 200 businesses comparing traditional marketing channels with digital marketing strategies.',
+        methodology: 'Tracked marketing spend and conversion rates across 200 businesses over 12 months, comparing traditional advertising (TV, radio, print) with digital channels (social media, search, email).',
+        key_findings: [
+          'Digital marketing generates 2.8x higher ROI than traditional advertising',
+          'Social media advertising has the highest engagement rate at 3.2%',
+          'Email marketing delivers the best ROI at 4200% return on investment',
+          'Digital campaigns can be optimized in real-time, improving performance by 45%'
         ],
-        industryPerformance: [
-          { industry: 'E-commerce', digitalROI: '450%', traditionalROI: '150%' },
-          { industry: 'Healthcare', digitalROI: '380%', traditionalROI: '180%' },
-          { industry: 'Education', digitalROI: '520%', traditionalROI: '120%' },
-          { industry: 'Real Estate', digitalROI: '340%', traditionalROI: '200%' }
+        statistics: [
+          { metric: 'ROI Advantage', value: '2.8x', description: 'Higher returns from digital marketing', icon: TrendingUp },
+          { metric: 'Email Marketing ROI', value: '4200%', description: 'Return on email marketing investment', icon: DollarSign },
+          { metric: 'Real-time Optimization', value: '45%', description: 'Performance improvement capability', icon: BarChart3 },
+          { metric: 'Targeting Precision', value: '85%', description: 'Accuracy in reaching target audience', icon: Users }
+        ],
+        detailed_analysis: {
+          channelComparison: [
+            { channel: 'Social Media Ads', avgROI: '320%', engagementRate: '3.2%', costPerLead: '$12' },
+            { channel: 'Google Ads', avgROI: '280%', engagementRate: '2.8%', costPerLead: '$15' },
+            { channel: 'Email Marketing', avgROI: '4200%', engagementRate: '18%', costPerLead: '$2' },
+            { channel: 'Traditional TV', avgROI: '120%', engagementRate: '0.8%', costPerLead: '$45' },
+            { channel: 'Print Advertising', avgROI: '95%', engagementRate: '0.3%', costPerLead: '$65' }
+          ],
+          industryPerformance: [
+            { industry: 'E-commerce', digitalROI: '450%', traditionalROI: '150%' },
+            { industry: 'Healthcare', digitalROI: '380%', traditionalROI: '180%' },
+            { industry: 'Education', digitalROI: '520%', traditionalROI: '120%' },
+            { industry: 'Real Estate', digitalROI: '340%', traditionalROI: '200%' }
+          ]
+        },
+        conclusion: 'Digital marketing consistently outperforms traditional advertising across all metrics, offering better targeting, measurability, and cost-effectiveness.',
+        recommendations: [
+          'Allocate 70-80% of marketing budget to digital channels',
+          'Implement comprehensive analytics and tracking systems',
+          'Focus on email marketing for highest ROI',
+          'Use A/B testing for continuous campaign optimization'
         ]
       },
-      conclusion: 'Digital marketing consistently outperforms traditional advertising across all metrics, offering better targeting, measurability, and cost-effectiveness.',
-      recommendations: [
-        'Allocate 70-80% of marketing budget to digital channels',
-        'Implement comprehensive analytics and tracking systems',
-        'Focus on email marketing for highest ROI',
-        'Use A/B testing for continuous campaign optimization'
-      ]
-    },
     {
       title: 'Website Performance Impact: Loading Speed vs Conversion Rates Study',
       category: 'Web Development Research',
       duration: '8-month study',
-      image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image_url: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
       overview: 'Comprehensive analysis of how website loading speeds affect user behavior, conversion rates, and business revenue across 300 e-commerce websites.',
       methodology: 'Monitored 300 e-commerce websites with varying loading speeds, tracking user behavior, bounce rates, conversion rates, and revenue over 8 months.',
-      keyFindings: [
+      key_findings: [
         'Every 1-second delay in page load time reduces conversions by 7%',
         'Websites loading in under 2 seconds have 15% higher conversion rates',
         '40% of users abandon websites that take more than 3 seconds to load',
@@ -126,7 +135,7 @@ const CaseStudies = () => {
         { metric: 'Abandonment Rate', value: '40%', description: 'Users leaving after 3+ seconds', icon: AlertTriangle },
         { metric: 'Mobile Sensitivity', value: '5x', description: 'Higher abandonment on mobile', icon: Globe }
       ],
-      detailedAnalysis: {
+      detailed_analysis: {
         speedImpact: [
           { loadTime: '0-1 seconds', conversionRate: '25.6%', bounceRate: '15%', revenueImpact: '+35%' },
           { loadTime: '1-2 seconds', conversionRate: '22.1%', bounceRate: '22%', revenueImpact: '+18%' },
@@ -152,10 +161,10 @@ const CaseStudies = () => {
       title: 'Brand Identity Consistency: Impact on Customer Trust and Revenue',
       category: 'Brand Strategy Research',
       duration: '10-month study',
-      image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+      image_url: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
       overview: 'Research study analyzing the relationship between brand consistency across touchpoints and its impact on customer trust, loyalty, and revenue generation.',
       methodology: 'Evaluated 180 companies across different industries, measuring brand consistency scores and correlating them with customer trust metrics, retention rates, and revenue growth.',
-      keyFindings: [
+      key_findings: [
         'Consistent brand presentation increases revenue by up to 23%',
         'Companies with strong brand consistency see 3.5x more brand visibility',
         'Brand-consistent companies have 1.9x higher customer retention rates',
@@ -167,7 +176,7 @@ const CaseStudies = () => {
         { metric: 'Customer Retention', value: '1.9x', description: 'Better retention rates', icon: Users },
         { metric: 'Consumer Expectation', value: '90%', description: 'Expect cross-channel consistency', icon: CheckCircle }
       ],
-      detailedAnalysis: {
+      detailed_analysis: {
         consistencyImpact: [
           { metric: 'Brand Recognition', consistent: '85%', inconsistent: '45%', improvement: '89%' },
           { metric: 'Customer Trust', consistent: '78%', inconsistent: '42%', improvement: '86%' },
@@ -188,49 +197,9 @@ const CaseStudies = () => {
         'Train all staff on brand standards and values',
         'Invest in brand management tools and systems'
       ]
-    },
-    {
-      title: 'SEO vs Paid Advertising: Long-term Value and Cost Analysis',
-      category: 'SEO & Digital Marketing Research',
-      duration: '18-month study',
-      image: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=800',
-      overview: 'Longitudinal study comparing the long-term value, cost-effectiveness, and sustainability of SEO strategies versus paid advertising campaigns.',
-      methodology: 'Tracked 250 businesses over 18 months, comparing those focusing on SEO with those primarily using paid advertising, measuring traffic, conversions, and costs.',
-      keyFindings: [
-        'SEO delivers 5.66x more traffic than paid advertising in the long term',
-        'Organic search results have 8.5x higher click-through rates than paid ads',
-        'SEO costs 61% less than PPC advertising over 12+ months',
-        'Companies with strong SEO see 14.6% close rate vs 1.7% for outbound marketing'
-      ],
-      statistics: [
-        { metric: 'Traffic Volume', value: '5.66x', description: 'More traffic from SEO long-term', icon: TrendingUp },
-        { metric: 'Click-through Rate', value: '8.5x', description: 'Higher CTR for organic results', icon: BarChart3 },
-        { metric: 'Cost Efficiency', value: '61%', description: 'Lower cost than PPC long-term', icon: DollarSign },
-        { metric: 'Close Rate', value: '14.6%', description: 'SEO leads close rate', icon: Users }
-      ],
-      detailedAnalysis: {
-        timelineComparison: [
-          { period: '0-3 months', seoTraffic: '15%', ppcTraffic: '85%', seoCost: '$2,500', ppcCost: '$8,000' },
-          { period: '3-6 months', seoTraffic: '35%', ppcTraffic: '65%', seoCost: '$3,000', ppcCost: '$8,500' },
-          { period: '6-12 months', seoTraffic: '55%', ppcTraffic: '45%', seoCost: '$3,500', ppcCost: '$9,200' },
-          { period: '12+ months', seoTraffic: '75%', ppcTraffic: '25%', seoCost: '$4,000', ppcCost: '$10,000' }
-        ],
-        channelPerformance: [
-          { channel: 'Organic Search', avgCTR: '28.5%', conversionRate: '14.6%', costPerLead: '$8' },
-          { channel: 'Google Ads', avgCTR: '3.17%', conversionRate: '3.75%', costPerLead: '$35' },
-          { channel: 'Facebook Ads', avgCTR: '0.9%', conversionRate: '1.85%', costPerLead: '$42' },
-          { channel: 'Display Ads', avgCTR: '0.46%', conversionRate: '0.77%', costPerLead: '$58' }
-        ]
-      },
-      conclusion: 'While paid advertising provides immediate results, SEO offers superior long-term value, sustainability, and cost-effectiveness for most businesses.',
-      recommendations: [
-        'Invest in SEO for long-term sustainable growth',
-        'Use PPC for immediate results while building SEO',
-        'Focus on high-quality content and technical SEO',
-        'Monitor and adapt to search algorithm changes'
-      ]
     }
   ];
+  }, [caseStudiesData]);
 
   return (
     <motion.div
@@ -352,7 +321,7 @@ const CaseStudies = () => {
                     Key Findings
                   </h3>
                   <div className="space-y-4">
-                    {caseStudies[selectedStudy].keyFindings.map((finding, index) => (
+                    {caseStudies[selectedStudy].key_findings.map((finding, index) => (
                       <div key={index} className="flex items-start space-x-3">
                         <CheckCircle className="w-5 h-5 text-secondary-500 flex-shrink-0 mt-1" />
                         <p className="text-gray-700">{finding}</p>
@@ -387,11 +356,11 @@ const CaseStudies = () => {
                   </h3>
                   
                   {/* Render different analysis based on study type */}
-                  {caseStudies[selectedStudy].detailedAnalysis.costBreakdown && (
+                  {caseStudies[selectedStudy].detailed_analysis.costBreakdown && (
                     <div className="mb-8">
                       <h4 className="font-semibold text-gray-900 mb-4">Cost Breakdown Analysis</h4>
                       <div className="space-y-3">
-                        {caseStudies[selectedStudy].detailedAnalysis.costBreakdown.map((item, index) => (
+                        {caseStudies[selectedStudy].detailed_analysis.costBreakdown.map((item, index) => (
                           <div key={index} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                             <span className="font-medium text-gray-700">{item.category}</span>
                             <div className="text-right">
@@ -406,11 +375,11 @@ const CaseStudies = () => {
                     </div>
                   )}
 
-                  {caseStudies[selectedStudy].detailedAnalysis.channelComparison && (
+                  {caseStudies[selectedStudy].detailed_analysis.channelComparison && (
                     <div className="mb-8">
                       <h4 className="font-semibold text-gray-900 mb-4">Channel Performance Comparison</h4>
                       <div className="space-y-3">
-                        {caseStudies[selectedStudy].detailedAnalysis.channelComparison.map((channel, index) => (
+                        {caseStudies[selectedStudy].detailed_analysis.channelComparison.map((channel, index) => (
                           <div key={index} className="p-4 bg-gray-50 rounded-lg">
                             <div className="font-medium text-gray-900 mb-2">{channel.channel}</div>
                             <div className="grid grid-cols-3 gap-4 text-sm">
@@ -433,11 +402,11 @@ const CaseStudies = () => {
                     </div>
                   )}
 
-                  {caseStudies[selectedStudy].detailedAnalysis.speedImpact && (
+                  {caseStudies[selectedStudy].detailed_analysis.speedImpact && (
                     <div className="mb-8">
                       <h4 className="font-semibold text-gray-900 mb-4">Speed Impact Analysis</h4>
                       <div className="space-y-3">
-                        {caseStudies[selectedStudy].detailedAnalysis.speedImpact.map((speed, index) => (
+                        {caseStudies[selectedStudy].detailed_analysis.speedImpact.map((speed, index) => (
                           <div key={index} className="p-4 bg-gray-50 rounded-lg">
                             <div className="font-medium text-gray-900 mb-2">{speed.loadTime}</div>
                             <div className="grid grid-cols-2 gap-4 text-sm">

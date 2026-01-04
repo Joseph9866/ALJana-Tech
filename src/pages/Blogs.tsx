@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
@@ -11,6 +11,7 @@ import {
   CheckCircle,
   X
 } from 'lucide-react';
+import { useRealTimeData } from '../lib/useRealTimeData';
 
 const Blogs = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.3, triggerOnce: true });
@@ -21,81 +22,90 @@ const Blogs = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isDownloaded, setIsDownloaded] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const { data: blogsData } = useRealTimeData('blog_posts', { column: 'published', value: true });
 
-  const blogs = [
-    {
-      id: 'brand-identity-guide-2025',
-      title: 'The Complete Guide to Brand Identity in 2025',
-      excerpt: 'Discover the latest trends and strategies for creating compelling brand identities that resonate with modern audiences.',
-      author: 'Julius Maingi',
-      date: '2025-01-15',
-      category: 'Brand Strategy',
-      readTime: '12 min read',
-      image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
-      downloadUrl: '/downloads/brand-identity-guide-2025.pdf',
-      featured: true
-    },
-    {
-      id: 'digital-marketing-trends-2025',
-      title: 'Digital Marketing Trends That Will Dominate 2025',
-      excerpt: 'Stay ahead of the curve with insights into the digital marketing strategies that will drive success in the coming year.',
-      author: 'Grace Nyong\'o',
-      date: '2025-01-10',
-      category: 'Digital Marketing',
-      readTime: '8 min read',
-      image: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
-      downloadUrl: '/downloads/digital-marketing-trends-2025.pdf',
-      featured: false
-    },
-    {
-      id: 'web-development-best-practices',
-      title: 'Modern Web Development: Best Practices for 2025',
-      excerpt: 'Learn the essential techniques and technologies that every web developer should master in the modern digital landscape.',
-      author: 'Michael Ochieng',
-      date: '2025-01-05',
-      category: 'Web Development',
-      readTime: '15 min read',
-      image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
-      downloadUrl: '/downloads/web-development-best-practices.pdf',
-      featured: false
-    },
-    {
-      id: 'cloud-computing-small-business',
-      title: 'Cloud Computing Solutions for Small Businesses',
-      excerpt: 'A comprehensive guide to leveraging cloud technologies to scale your business efficiently and cost-effectively.',
-      author: 'David Kimani',
-      date: '2024-12-28',
-      category: 'Cloud Computing',
-      readTime: '10 min read',
-      image: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800',
-      downloadUrl: '/downloads/cloud-computing-small-business.pdf',
-      featured: false
-    },
-    {
-      id: 'social-media-strategy-guide',
-      title: 'Building a Winning Social Media Strategy',
-      excerpt: 'Master the art of social media marketing with proven strategies that build communities and drive engagement.',
-      author: 'Amina Hassan',
-      date: '2024-12-20',
-      category: 'Social Media',
-      readTime: '9 min read',
-      image: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
-      downloadUrl: '/downloads/social-media-strategy-guide.pdf',
-      featured: false
-    },
-    {
-      id: 'seo-optimization-2025',
-      title: 'SEO Optimization Techniques for Maximum Visibility',
-      excerpt: 'Unlock the secrets of search engine optimization and drive organic traffic to your website with proven techniques.',
-      author: 'Sarah Wanjiku',
-      date: '2024-12-15',
-      category: 'SEO',
-      readTime: '11 min read',
-      image: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=800',
-      downloadUrl: '/downloads/seo-optimization-2025.pdf',
-      featured: false
+  // Use database blogs if available, otherwise use fallback
+  const blogs = useMemo(() => {
+    if (blogsData && blogsData.length > 0) {
+      return blogsData;
     }
-  ];
+
+    // Fallback blogs
+    return [
+      {
+        id: 'brand-identity-guide-2025',
+        title: 'The Complete Guide to Brand Identity in 2025',
+        excerpt: 'Discover the latest trends and strategies for creating compelling brand identities that resonate with modern audiences.',
+        author: 'Julius Maingi',
+        created_at: '2025-01-15',
+        category: 'Brand Strategy',
+        read_time: '12 min read',
+        image_url: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+        download_url: '/downloads/brand-identity-guide-2025.pdf',
+        featured: true
+      },
+      {
+        id: 'digital-marketing-trends-2025',
+        title: 'Digital Marketing Trends That Will Dominate 2025',
+        excerpt: 'Stay ahead of the curve with insights into the digital marketing strategies that will drive success in the coming year.',
+        author: 'Grace Nyong\'o',
+        created_at: '2025-01-10',
+        category: 'Digital Marketing',
+        read_time: '8 min read',
+        image_url: 'https://images.pexels.com/photos/265087/pexels-photo-265087.jpeg?auto=compress&cs=tinysrgb&w=800',
+        download_url: '/downloads/digital-marketing-trends-2025.pdf',
+        featured: false
+      },
+      {
+        id: 'web-development-best-practices',
+        title: 'Modern Web Development: Best Practices for 2025',
+        excerpt: 'Learn the essential techniques and technologies that every web developer should master in the modern digital landscape.',
+        author: 'Michael Ochieng',
+        created_at: '2025-01-05',
+        category: 'Web Development',
+        read_time: '15 min read',
+        image_url: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+        download_url: '/downloads/web-development-best-practices.pdf',
+        featured: false
+      },
+      {
+        id: 'cloud-computing-small-business',
+        title: 'Cloud Computing Solutions for Small Businesses',
+        excerpt: 'A comprehensive guide to leveraging cloud technologies to scale your business efficiently and cost-effectively.',
+        author: 'David Kimani',
+        created_at: '2024-12-28',
+        category: 'Cloud Computing',
+        read_time: '10 min read',
+        image_url: 'https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=800',
+        download_url: '/downloads/cloud-computing-small-business.pdf',
+        featured: false
+      },
+      {
+        id: 'social-media-strategy-guide',
+        title: 'Building a Winning Social Media Strategy',
+        excerpt: 'Master the art of social media marketing with proven strategies that build communities and drive engagement.',
+        author: 'Amina Hassan',
+        created_at: '2024-12-20',
+        category: 'Social Media',
+        read_time: '9 min read',
+        image_url: 'https://images.pexels.com/photos/267350/pexels-photo-267350.jpeg?auto=compress&cs=tinysrgb&w=800',
+        download_url: '/downloads/social-media-strategy-guide.pdf',
+        featured: false
+      },
+      {
+        id: 'seo-optimization-2025',
+        title: 'SEO Optimization Techniques for Maximum Visibility',
+        excerpt: 'Unlock the secrets of search engine optimization and drive organic traffic to your website with proven techniques.',
+        author: 'Sarah Wanjiku',
+        created_at: '2024-12-15',
+        category: 'SEO',
+        read_time: '11 min read',
+        image_url: 'https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=800',
+        download_url: '/downloads/seo-optimization-2025.pdf',
+        featured: false
+      }
+    ];
+  }, [blogsData]);
 
   const handleDownloadClick = (blog: any) => {
     setSelectedBlog(blog);
@@ -115,7 +125,7 @@ const Blogs = () => {
       
       // Simulate file download
       const link = document.createElement('a');
-      link.href = selectedBlog.downloadUrl;
+      link.href = selectedBlog.download_url;
       link.download = `${selectedBlog.id}.pdf`;
       document.body.appendChild(link);
       link.click();
@@ -227,9 +237,9 @@ const Blogs = () => {
                     </div>
                     <div className="flex items-center space-x-2">
                       <Calendar className="w-5 h-5 text-gray-500" />
-                      <span className="text-gray-700">{new Date(blog.date).toLocaleDateString()}</span>
+                      <span className="text-gray-700">{new Date(blog.created_at).toLocaleDateString()}</span>
                     </div>
-                    <span className="text-gray-500">{blog.readTime}</span>
+                    <span className="text-gray-500">{blog.read_time}</span>
                   </div>
                   
                   <button
@@ -244,7 +254,7 @@ const Blogs = () => {
                 <div className="relative">
                   <div className="bg-gradient-to-r from-primary-600 to-secondary-500 p-1 rounded-3xl">
                     <img
-                      src={blog.image}
+                      src={blog.image_url}
                       alt={blog.title}
                       className="w-full h-80 object-cover rounded-3xl"
                     />
@@ -287,7 +297,7 @@ const Blogs = () => {
               >
                 <div className="relative h-48 overflow-hidden">
                   <img
-                    src={blog.image}
+                    src={blog.image_url}
                     alt={blog.title}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                   />
@@ -307,9 +317,9 @@ const Blogs = () => {
                     <div className="flex items-center space-x-4 text-sm text-gray-500">
                       <span>{blog.author}</span>
                       <span>•</span>
-                      <span>{new Date(blog.date).toLocaleDateString()}</span>
+                      <span>{new Date(blog.created_at).toLocaleDateString()}</span>
                     </div>
-                    <span className="text-sm text-gray-500">{blog.readTime}</span>
+                    <span className="text-sm text-gray-500">{blog.read_time}</span>
                   </div>
                   
                   <button
