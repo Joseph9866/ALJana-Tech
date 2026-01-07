@@ -1,7 +1,7 @@
 // Helper script to generate SHA-256 password hashes for admin users
 // Run this with: node scripts/generate-password-hash.js
 
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 const passwords = {
   'josekeam01@gmail.com': 'Josejk9866:@AT',

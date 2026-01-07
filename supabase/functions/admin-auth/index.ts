@@ -22,6 +22,24 @@ Deno.serve(async (req: Request) => {
     const url = new URL(req.url);
     const path = url.pathname;
 
+    // TEST ENDPOINT - DELETE THIS AFTER DEBUGGING
+    if (path.endsWith('/test') && req.method === 'POST') {
+      const { password } = await req.json();
+      const encoder = new TextEncoder();
+      const data = encoder.encode(password);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      
+      return new Response(
+        JSON.stringify({ inputPassword: password, computedHash: hash }),
+        {
+          status: 200,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
     if (path.endsWith('/login') && req.method === 'POST') {
       const { email, password } = await req.json();
 
